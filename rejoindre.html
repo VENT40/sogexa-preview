@@ -103,10 +103,28 @@
     ════════════════════════════════════════ */
     .rj-slider-wrap { background: #0d0c0a; }
 
-    /* Main stage */
+    /* Main stage — split layout */
     .rj-stage {
-      position: relative; width: 100%; height: 78vh;
-      overflow: hidden; min-height: 500px;
+      display: flex;
+      height: 78vh; min-height: 500px;
+      overflow: hidden;
+    }
+
+    /* Left text panel */
+    .rj-panel-left {
+      width: 42%; flex-shrink: 0;
+      background: #0d0c0a;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 64px 56px 64px 72px;
+      border-right: 1px solid rgba(255,255,255,.06);
+      z-index: 3;
+    }
+
+    /* Right photo panel */
+    .rj-panel-right {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
     }
 
     /* Slides */
@@ -141,33 +159,25 @@
       100% { transform: scale(1.06); }
     }
 
-    /* Gradient overlay */
+    /* Gradient overlay — bottom only, text is in left panel */
     .rj-overlay {
       position: absolute; inset: 0; z-index: 2;
-      background:
-        linear-gradient(90deg, rgba(13,12,10,.65) 0%, rgba(13,12,10,.20) 50%, rgba(13,12,10,0) 100%),
-        linear-gradient(180deg, rgba(13,12,10,0) 55%, rgba(13,12,10,.55) 100%);
+      background: linear-gradient(180deg, rgba(13,12,10,0) 60%, rgba(13,12,10,.5) 100%);
       pointer-events: none;
     }
 
-    /* Text overlay */
-    .rj-text {
-      position: absolute; inset: 0; z-index: 3;
-      max-width: 1280px; margin: 0 auto; padding: 0 56px;
-      display: flex; flex-direction: column; justify-content: center;
-    }
     .rj-proverb {
       font-family: 'Source Serif 4', serif;
-      font-size: clamp(32px, 4.5vw, 60px);
+      font-size: clamp(28px, 3vw, 50px);
       font-style: italic; font-weight: 400;
-      line-height: 1.2; color: #fff;
-      max-width: 640px; margin: 20px 0 24px;
+      line-height: 1.25; color: #fff;
+      margin: 20px 0 28px;
       letter-spacing: -0.02em;
     }
     .rj-proverb span { color: var(--orange); }
     .rj-sub {
-      font-size: 17px; color: rgba(255,255,255,.7);
-      max-width: 440px; line-height: 1.6;
+      font-size: 17px; color: rgba(255,255,255,.65);
+      line-height: 1.65;
     }
 
     /* Counter */
@@ -399,6 +409,19 @@
   <div class="rj-slider-wrap">
     <div class="rj-stage" id="rj-stage">
 
+      <!-- Left text panel -->
+      <div class="rj-panel-left">
+        <div class="eyebrow" style="color:rgba(243,146,0,.85)">§ Nous rejoindre</div>
+        <p class="rj-proverb">
+          « Seul on va plus vite,<br>
+          <span>ensemble on va plus loin.</span> »
+        </p>
+        <p class="rj-sub">Un cabinet à taille humaine, dans les Landes, où chacun trouve sa place et grandit à son rythme.</p>
+      </div>
+
+      <!-- Right photo panel -->
+      <div class="rj-panel-right">
+
       <!-- Slides -->
       <div class="rj-slide active">
         <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_37_Project_20230703_0024.jpg')"></div>
@@ -468,16 +491,6 @@
       <!-- Overlay -->
       <div class="rj-overlay"></div>
 
-      <!-- Text -->
-      <div class="rj-text">
-        <div class="eyebrow">§ Nous rejoindre</div>
-        <p class="rj-proverb">
-          « Seul on va plus vite,<br>
-          <span>ensemble on va plus loin.</span> »
-        </p>
-        <p class="rj-sub">Un cabinet à taille humaine, dans les Landes, où chacun trouve sa place et grandit à son rythme.</p>
-      </div>
-
       <!-- Counter -->
       <div class="rj-counter">
         <span class="rj-count-num"><strong id="rj-cur">01</strong> / <span id="rj-total">16</span></span>
@@ -493,6 +506,8 @@
       <div class="rj-progress">
         <div class="rj-progress-bar" id="rj-progress"></div>
       </div>
+
+      </div><!-- end rj-panel-right -->
     </div>
 
     <!-- Thumbnail strip -->
