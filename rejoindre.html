@@ -373,6 +373,53 @@
     .footer-legal { display: flex; gap: 24px; }
     .footer-legal a { transition: color .2s; }
     .footer-legal a:hover { color: var(--orange); }
+
+    .nav-hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:6px; }
+    .nav-hamburger span { display:block; width:22px; height:2px; background:var(--dark); border-radius:2px; transition:transform .3s,opacity .2s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 1024px) {
+      .nav-inner { padding: 16px 32px; }
+      .nav-links { gap: 20px; }
+      .rj-why { padding: 64px 32px; }
+      .rj-why-grid { grid-template-columns: repeat(2, 1fr); }
+      .rj-stats { padding: 48px 32px; }
+      .rj-form-section { padding: 64px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      .nav-inner { padding: 14px 20px; position: relative; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:#fbf9f5; flex-direction:column; padding:4px 20px 20px; border-bottom:1px solid #ece6da; box-shadow:0 8px 24px rgba(0,0,0,.08); gap:0; z-index:55; }
+      .nav-links.open { display: flex; }
+      .nav-link { font-size:16px; padding:14px 0; border-bottom:1px solid #ece6da; }
+      .nav-link:last-child { border-bottom: none; }
+      .nav-cta { display: none; }
+      .rj-stage { flex-direction: column; height: auto; min-height: unset; }
+      .rj-panel-left { width: 100%; padding: 48px 20px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+      .rj-panel-right { height: 320px; }
+      .rj-thumbstrip { padding: 12px 20px 16px; }
+      .rj-why { padding: 56px 20px; }
+      .rj-why-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
+      .rj-why-grid { grid-template-columns: 1fr; }
+      .rj-stats { padding: 48px 20px; }
+      .rj-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .rj-stage-section { grid-template-columns: 1fr; }
+      .rj-stage-photo { min-height: 280px; }
+      .rj-stage-content { padding: 48px 20px; }
+      .rj-form-section { padding: 56px 20px; }
+      .rj-form-inner { grid-template-columns: 1fr; gap: 40px; }
+      .rj-form-row { grid-template-columns: 1fr; }
+      .rj-form { padding: 32px 20px; }
+      .footer { padding: 48px 20px 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 480px) {
+      .rj-stats-grid { grid-template-columns: 1fr; }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -401,6 +448,9 @@
         <a class="nav-link active" href="rejoindre.html">Nous rejoindre</a>
         <a class="nav-link" href="contact.html">Nous contacter</a>
       </nav>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
       <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
     </div>
   </header>
@@ -781,6 +831,21 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
     document.querySelectorAll('[data-reveal], [data-reveal-left], [data-reveal-right]')
       .forEach(el => observer.observe(el));
+
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
+    }
   </script>
 </body>
 </html>

@@ -532,6 +532,124 @@
     .footer-legal { display: flex; gap: 24px; }
     .footer-legal a { transition: color .2s; }
     .footer-legal a:hover { color: var(--orange); }
+
+    /* ═══════════════════════════════════════
+       HAMBURGER
+    ═══════════════════════════════════════ */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: transform .3s ease, opacity .2s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ═══════════════════════════════════════
+       TABLETTE ≤ 1024px
+    ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .nav-inner { padding: 16px 32px; }
+      .nav-links { gap: 20px; }
+      .hero-left { padding: 80px 40px 48px 48px; }
+      .hero-right { left: 48%; }
+      .stats { padding: 48px 32px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .dirigeants { padding: 64px 32px; }
+      .reasons-section { padding: 64px 32px; }
+      .reasons-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact { padding: 64px 32px; }
+      .avis-section { padding: 64px 32px 48px; }
+      .footer { padding: 64px 32px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+
+    /* ═══════════════════════════════════════
+       MOBILE ≤ 768px
+    ═══════════════════════════════════════ */
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav-inner { padding: 14px 20px; position: relative; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: #fbf9f5;
+        flex-direction: column;
+        padding: 4px 20px 20px;
+        border-bottom: 1px solid #ece6da;
+        box-shadow: 0 8px 24px rgba(0,0,0,.08);
+        gap: 0; z-index: 55;
+      }
+      .nav-links.open { display: flex; }
+      .nav-link { font-size: 16px; padding: 14px 0; border-bottom: 1px solid #ece6da; }
+      .nav-link:last-child { border-bottom: none; }
+      .nav-cta { display: none; }
+
+      /* Hero */
+      .hero { height: auto; min-height: unset; max-height: unset; }
+      .hero-left { position: relative; width: 100%; padding: 80px 24px 52px; min-height: 460px; }
+      .hero-right { display: none; }
+      .hero-text { max-width: 100%; }
+
+      /* Stats */
+      .stats { padding: 48px 20px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+      /* Missions list (homepage) */
+      .missions-section { padding: 64px 20px; }
+      .mission-item { padding: 20px 0; }
+      .mission-title { font-size: 28px; }
+
+      /* Dirigeants */
+      .dirigeants { padding: 64px 20px; }
+      .dirigeants-grid { grid-template-columns: 1fr; gap: 40px; }
+      .dirigeants-quote { position: static; margin-top: 16px; max-width: 100%; border-radius: 12px; }
+      .dirigeants-names { grid-template-columns: 1fr; }
+
+      /* Reasons */
+      .reasons-section { padding: 64px 20px; }
+      .reasons-header { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
+      .reasons-grid { grid-template-columns: 1fr; }
+
+      /* Avis */
+      .avis-section { padding: 48px 20px; }
+      .avis-stage { height: 340px; }
+
+      /* Contact */
+      .contact { padding: 64px 20px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-phone { font-size: 24px; }
+
+      /* Footer */
+      .footer { padding: 48px 20px 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+      .footer-legal { flex-wrap: wrap; }
+    }
+
+    /* ═══════════════════════════════════════
+       PETIT MOBILE ≤ 480px
+    ═══════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-value { font-size: 44px; }
+      .hero-left { padding: 72px 20px 44px; min-height: 400px; }
+      .mission-title { font-size: 24px; }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -593,6 +711,9 @@
         <a class="nav-link" href="contact.html">Nous contacter</a>
       </nav>
       <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
@@ -1109,6 +1230,23 @@
         if (link.getAttribute('href') === '#' + current) link.classList.add('active');
       });
     }, { passive: true });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+      // Fermer le menu au clic sur un lien
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
+    }
   </script>
 </body>
 </html>

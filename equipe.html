@@ -461,6 +461,34 @@
     }
     .lightbox-close:hover { background: rgba(255,255,255,.22); }
     [data-lightbox] { cursor: pointer; }
+
+    /* ── Hamburger ── */
+    .nav-hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:6px; }
+    .nav-hamburger span { display:block; width:22px; height:2px; background:var(--dark); border-radius:2px; transition:transform .3s,opacity .2s; }
+    .nav-hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity:0; }
+    .nav-hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .nav-inner { padding: 0 28px; }
+      .eq-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display:none; position:absolute; top:100%; left:0; right:0; background:#fbf9f5; flex-direction:column; padding:4px 20px 20px; border-bottom:1px solid #ece6da; box-shadow:0 8px 24px rgba(0,0,0,.08); gap:0; z-index:55; }
+      .nav-links.open { display: flex; }
+      .nav-link { padding: 12px 0; border-bottom: 1px solid #ece6da; font-size: 15px; }
+      .nav-cta { display: none; }
+      .eq-hero { padding: 80px 20px 48px; }
+      .eq-hero-inner h1 { font-size: clamp(2rem, 8vw, 3rem); }
+      .eq-assoc-grid { grid-template-columns: 1fr; gap: 40px; }
+      .eq-grid { grid-template-columns: repeat(2, 1fr); }
+      .eq-section-inner { padding: 64px 20px; }
+    }
+    @media (max-width: 480px) {
+      .eq-grid { grid-template-columns: 1fr; }
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -489,6 +517,9 @@
         <a class="nav-link" href="rejoindre.html">Nous rejoindre</a>
         <a class="nav-link" href="contact.html">Nous contacter</a>
       </nav>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
       <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
     </div>
   </header>
@@ -813,6 +844,21 @@
     lbClose.addEventListener('click', closeLightbox);
     lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    const hamburger = document.getElementById('nav-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          navLinks.classList.remove('open');
+        });
+      });
+    }
   </script>
 </body>
 </html>
