@@ -1213,19 +1213,13 @@
 
     // Active nav link on scroll
     const sections = document.querySelectorAll('section[id], div[id="equipe"]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sectionMap = {
-      'accueil': 0,
-      'missions': 4,
-      'presentation': 6,
-      'contact': 6,
-    };
+    const scrollNavLinks = document.querySelectorAll('.nav-link');
     window.addEventListener('scroll', () => {
       let current = 'accueil';
       sections.forEach(s => {
         if (window.scrollY >= s.offsetTop - 120) current = s.id;
       });
-      navLinks.forEach(link => {
+      scrollNavLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === '#' + current) link.classList.add('active');
       });
