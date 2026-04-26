@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vent40.github.io/sogexa-preview/sitemap.xml
