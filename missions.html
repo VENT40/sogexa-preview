@@ -136,8 +136,10 @@
     .industry-badge:hover { border-color: var(--orange); color: var(--orange); }
 
     /* ── MISSION BLOCK ── */
-    .mission-block {
+    .mission-block { }
+    .mission-inner {
       display: grid; grid-template-columns: 1fr 1fr;
+      max-width: 1440px; margin: 0 auto;
       min-height: 580px;
     }
     .mission-photo {
@@ -326,6 +328,7 @@
 
   <!-- ======================== MISSION 1 — CRÉATION ======================== -->
   <section class="mission-block bg-cream" id="creation">
+    <div class="mission-inner">
     <div class="mission-photo" data-reveal-left>
       <img loading="lazy" src="images/David baslé.jpg"
            alt="David Baslé — Associé Sogexa">
@@ -345,10 +348,12 @@
         <li>Valorisation et accompagnement lors de la cession ou transmission</li>
       </ul>
     </div>
+    </div>
   </section>
 
   <!-- ======================== MISSION 2 — CONSEIL ======================== -->
   <section class="mission-block bg-warm" id="conseil">
+    <div class="mission-inner">
     <div class="mission-content" data-reveal-left style="transition-delay:0s">
       <span class="mission-num" style="left:56px;right:auto">02</span>
       <div class="eyebrow">Conseil &amp; gestion</div>
@@ -368,10 +373,12 @@
            alt="Conseil et gestion d'entreprise — cabinet Sogexa">
       <div class="mission-photo-overlay"></div>
     </div>
+    </div>
   </section>
 
   <!-- ======================== MISSION 3 — EXPERTISE ======================== -->
   <section class="mission-block bg-beige" id="expertise">
+    <div class="mission-inner">
     <div class="mission-photo" data-reveal-left>
       <img loading="lazy" src="images/imgi_4_IMG_0057-2-scaled-qgpx22sbrthkes5ln83z3g6my9q3pcpl57xz1dflv4.jpg"
            alt="Expertise comptable — cabinet Sogexa Mont-de-Marsan">
@@ -391,10 +398,12 @@
         <li>Révision et certification des comptes</li>
       </ul>
     </div>
+    </div>
   </section>
 
   <!-- ======================== MISSION 4 — SOCIAL ======================== -->
   <section class="mission-block bg-warm" id="social">
+    <div class="mission-inner">
     <div class="mission-content" data-reveal-left style="transition-delay:0s">
       <span class="mission-num" style="left:56px;right:auto">04</span>
       <div class="eyebrow">Gestion sociale &amp; RH</div>
@@ -414,10 +423,12 @@
            alt="Gestion sociale et RH — cabinet Sogexa">
       <div class="mission-photo-overlay"></div>
     </div>
+    </div>
   </section>
 
   <!-- ======================== MISSION 5 — JURIDIQUE ======================== -->
   <section class="mission-block bg-cream" id="juridique">
+    <div class="mission-inner">
     <div class="mission-photo" data-reveal-left>
       <img loading="lazy" src="images/gestion juridique.jpeg"
            alt="Conseil juridique et fiscal — cabinet Sogexa">
@@ -436,6 +447,7 @@
         <li>Fiscalité personnelle et professionnelle — optimisation et déclarations</li>
         <li>Accompagnement lors des contrôles fiscaux</li>
       </ul>
+    </div>
     </div>
   </section>
 
