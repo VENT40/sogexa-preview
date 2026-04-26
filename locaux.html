@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos locaux — SOGEXA · Cabinet d'expertise comptable · Landes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      color: #1f1d1a; background: #fbf9f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --orange: #F39200;
+      --orange-deep: #d97a00;
+      --dark: #1f1d1a;
+      --cream: #fbf9f5;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 400; letter-spacing: -0.02em; margin: 0;
+    }
+
+    [data-reveal] {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal].revealed { opacity: 1; transform: none; }
+    [data-reveal-left] {
+      opacity: 0; transform: translateX(-56px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal-left].revealed { opacity: 1; transform: none; }
+    [data-reveal-right] {
+      opacity: 0; transform: translateX(56px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: .12s;
+    }
+    [data-reveal-right].revealed { opacity: 1; transform: none; }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange);
+    }
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 14px 28px; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit;
+    }
+    .btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+    /* ── NAV ── */
+    .nav { background: #fbf9f5; border-bottom: 1px solid #ece6da; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { height: 32px; width: auto; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link { color: #2c2a26; font-size: 14px; font-weight: 500; padding: 8px 0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+    .nav-link:hover, .nav-link.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .nav-cta { padding: 10px 18px; font-size: 12px; }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    .lx-hero {
+      position: relative; overflow: hidden;
+      height: 72vh; min-height: 480px;
+    }
+    .lx-hero-img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 40%;
+      display: block;
+      transition: transform 8s ease-out;
+    }
+    .lx-hero:hover .lx-hero-img { transform: scale(1.04); }
+    .lx-hero-overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(13,12,10,.75) 0%, rgba(13,12,10,.3) 55%, rgba(13,12,10,.05) 100%),
+        linear-gradient(180deg, rgba(13,12,10,0) 50%, rgba(13,12,10,.6) 100%);
+    }
+    .lx-hero-bar { position: absolute; top: 0; left: 0; bottom: 0; width: 5px; background: var(--orange); z-index: 2; }
+    .lx-hero-content {
+      position: absolute; inset: 0; z-index: 3;
+      max-width: 1280px; margin: 0 auto; padding: 0 56px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .lx-hero-title {
+      font-size: clamp(52px, 7vw, 88px);
+      line-height: 1.0; color: #fff; margin: 20px 0 24px;
+    }
+    .lx-hero-title em { color: var(--orange); font-style: italic; }
+    .lx-hero-sub {
+      font-size: 18px; color: rgba(255,255,255,.75);
+      max-width: 520px; line-height: 1.65;
+    }
+
+    /* ════════════════════════════════════════
+       INTRO
+    ════════════════════════════════════════ */
+    .lx-intro { background: #fbf9f5; padding: 88px 48px; }
+    .lx-intro-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .lx-intro-title { font-size: clamp(34px, 3.5vw, 48px); line-height: 1.15; margin: 16px 0 28px; }
+    .lx-intro-title em { color: var(--orange); font-style: italic; }
+    .lx-intro-text { font-size: 17px; line-height: 1.78; color: #5a564e; margin: 0 0 36px; }
+    .lx-intro-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .lx-pill {
+      padding: 8px 18px; border: 1px solid #ece6da;
+      font-size: 13px; font-weight: 500; color: #5a564e;
+      transition: border-color .25s, color .25s;
+    }
+    .lx-pill:hover { border-color: var(--orange); color: var(--orange); }
+    .lx-intro-photo { position: relative; }
+    .lx-intro-photo-main { width: 100%; aspect-ratio: 4/3; overflow: hidden; }
+    .lx-intro-photo-main img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    .lx-intro-photo-accent {
+      position: absolute; bottom: -32px; left: -32px;
+      width: 48%; aspect-ratio: 1/1; overflow: hidden;
+      border: 6px solid #fbf9f5;
+    }
+    .lx-intro-photo-accent img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ════════════════════════════════════════
+       ÉQUIPEMENTS (dark cards)
+    ════════════════════════════════════════ */
+    .lx-equip { background: #1f1d1a; padding: 96px 48px; }
+    .lx-equip-inner { max-width: 1280px; margin: 0 auto; }
+    .lx-equip-header { margin-bottom: 72px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+    .lx-equip-title { font-size: clamp(36px, 4vw, 52px); line-height: 1.1; margin-top: 16px; color: #fbf9f5; }
+    .lx-equip-title em { color: var(--orange); font-style: italic; }
+    .lx-equip-sub { font-size: 16px; line-height: 1.7; color: #8a8276; max-width: 380px; }
+    .lx-equip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .lx-equip-card {
+      background: #2a2823; padding: 48px 40px 56px;
+      position: relative; overflow: hidden;
+      transition: background .4s, transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .lx-equip-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .lx-equip-card:hover { background: #322f28; transform: translateY(-6px); }
+    .lx-equip-card:hover::before { transform: scaleX(1); }
+    .lx-equip-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(243,146,0,.12); border: 1.5px solid rgba(243,146,0,.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 32px;
+      transition: background .4s, border-color .4s;
+    }
+    .lx-equip-card:hover .lx-equip-icon { background: rgba(243,146,0,.22); border-color: var(--orange); }
+    .lx-equip-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .lx-equip-name { font-size: 22px; color: #fbf9f5; margin: 0 0 14px; }
+    .lx-equip-desc { font-size: 15px; line-height: 1.75; color: #8a8276; margin: 0; }
+
+    /* ════════════════════════════════════════
+       GALERIE
+    ════════════════════════════════════════ */
+    .lx-gallery { background: #faf6ec; padding: 96px 48px; border-top: 1px solid #ece6da; }
+    .lx-gallery-inner { max-width: 1280px; margin: 0 auto; }
+    .lx-gallery-header { margin-bottom: 56px; }
+    .lx-gallery-title { font-size: clamp(34px, 3.5vw, 48px); line-height: 1.1; margin-top: 16px; }
+    .lx-gallery-title em { color: var(--orange); font-style: italic; }
+
+    /* Mosaic grid */
+    .lx-mosaic {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 120px;
+      gap: 6px;
+    }
+    .lx-mosaic-item { overflow: hidden; cursor: pointer; }
+    .lx-mosaic-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s;
+      filter: saturate(.9);
+    }
+    .lx-mosaic-item:hover img { transform: scale(1.06); filter: saturate(1.1); }
+
+    /* Layout pattern */
+    .lx-m1 { grid-column: span 5; grid-row: span 3; }
+    .lx-m2 { grid-column: span 4; grid-row: span 2; }
+    .lx-m3 { grid-column: span 3; grid-row: span 2; }
+    .lx-m4 { grid-column: span 3; grid-row: span 2; }
+    .lx-m5 { grid-column: span 4; grid-row: span 2; }
+    .lx-m6 { grid-column: span 7; grid-row: span 3; }
+    .lx-m7 { grid-column: span 5; grid-row: span 3; }
+    .lx-m8 { grid-column: span 4; grid-row: span 2; }
+    .lx-m9 { grid-column: span 3; grid-row: span 2; }
+
+    /* Lightbox */
+    .lx-lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,9,8,0);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: background .35s;
+    }
+    .lx-lightbox.open { background: rgba(10,9,8,.92); pointer-events: all; }
+    .lx-lightbox img {
+      max-width: 90vw; max-height: 88vh;
+      object-fit: contain; display: block;
+      opacity: 0; transform: scale(.96);
+      transition: opacity .35s, transform .35s;
+    }
+    .lx-lightbox.open img { opacity: 1; transform: none; }
+    .lx-lb-close {
+      position: absolute; top: 24px; right: 24px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lx-lb-close:hover { background: var(--orange); border-color: var(--orange); }
+    .lx-lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 52px; height: 52px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lx-lb-nav:hover { background: var(--orange); border-color: var(--orange); }
+    .lx-lb-prev { left: 24px; }
+    .lx-lb-next { right: 24px; }
+
+    /* ════════════════════════════════════════
+       MAP + CONTACT
+    ════════════════════════════════════════ */
+    .lx-location { background: #1f1d1a; }
+    .lx-location-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .lx-map-wrap { position: relative; min-height: 420px; }
+    .lx-map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(.3); }
+    .lx-contact-panel {
+      padding: 80px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .lx-contact-title { font-size: clamp(28px, 3vw, 40px); color: #fbf9f5; margin: 16px 0 40px; line-height: 1.15; }
+    .lx-contact-title em { color: var(--orange); font-style: italic; }
+    .lx-info-block { margin-bottom: 28px; }
+    .lx-info-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #5a564e; margin-bottom: 8px; font-weight: 600; }
+    .lx-info-val { font-size: 16px; color: #c8bfa8; line-height: 1.6; }
+    .lx-info-phone { font-family: 'Source Serif 4', serif; font-size: 30px; color: var(--orange); }
+
+    /* ── FOOTER ── */
+    .footer { background: #0a0a0a; color: #a3a3a3; padding: 80px 48px 40px; }
+    .footer-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid #262626; margin-bottom: 40px; }
+    .footer-desc { margin-top: 24px; font-size: 14px; line-height: 1.6; max-width: 320px; }
+    .footer-col-title { font-size: 13px; color: #fff; margin-bottom: 16px; font-weight: 600; }
+    .footer-link { font-size: 14px; margin-bottom: 10px; cursor: pointer; transition: color .2s; }
+    .footer-link:hover { color: var(--orange); }
+    .footer-bottom { max-width: 1280px; margin: 0 auto; display: flex; justify-content: space-between; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { transition: color .2s; }
+    .footer-legal a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html"><img class="nav-logo" src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa"></a>
+      <nav class="nav-links">
+        <a class="nav-link" href="index.html">Accueil</a>
+        <a class="nav-link" href="equipe.html">Notre équipe</a>
+        <a class="nav-link" href="missions.html">Nos missions</a>
+        <a class="nav-link active" href="locaux.html">Nos locaux</a>
+        <a class="nav-link" href="rejoindre.html">Nous rejoindre</a>
+        <a class="nav-link" href="contact.html">Nous contacter</a>
+      </nav>
+      <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
+    </div>
+  </header>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="lx-hero">
+    <img class="lx-hero-img" src="images/nos locaux/imgi_12_Project_20220613_0002.jpg" alt="Nos locaux Sogexa">
+    <div class="lx-hero-overlay"></div>
+    <div class="lx-hero-bar"></div>
+    <div class="lx-hero-content" data-reveal>
+      <div class="eyebrow">§ Nos locaux</div>
+      <h1 class="lx-hero-title">
+        Un espace pensé<br>pour <em>bien travailler.</em>
+      </h1>
+      <p class="lx-hero-sub">
+        217 avenue du Corps Franc-Pommiès · 40280 Saint-Pierre-du-Mont
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================== INTRO ======================== -->
+  <section class="lx-intro">
+    <div class="lx-intro-inner">
+      <div data-reveal-left>
+        <div class="eyebrow">Où sommes-nous ?</div>
+        <h2 class="lx-intro-title">
+          Des locaux modernes,<br><em>lumineux et accessibles.</em>
+        </h2>
+        <p class="lx-intro-text">
+          Nos bureaux ont été conçus pour offrir à chaque collaborateur un cadre de travail agréable
+          et fonctionnel. Accessibles aux personnes à mobilité réduite, baignés de lumière naturelle,
+          ils reflètent les valeurs du cabinet : qualité, bien-être et convivialité.
+        </p>
+        <div class="lx-intro-pills">
+          <span class="lx-pill">Accessibilité PMR</span>
+          <span class="lx-pill">Lumière naturelle</span>
+          <span class="lx-pill">Parking gratuit</span>
+          <span class="lx-pill">Salle de réunion 30 pers.</span>
+          <span class="lx-pill">Fibre optique</span>
+        </div>
+      </div>
+      <div class="lx-intro-photo" data-reveal-right>
+        <div class="lx-intro-photo-main">
+          <img src="images/nos locaux/imgi_6_Project_20230222_0045-1024x683.jpg" alt="Salle de réunion Sogexa">
+        </div>
+        <div class="lx-intro-photo-accent">
+          <img src="images/nos locaux/imgi_2_20220613_182532.jpg" alt="Bureau Sogexa">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== ÉQUIPEMENTS ======================== -->
+  <section class="lx-equip">
+    <div class="lx-equip-inner">
+      <div class="lx-equip-header" data-reveal>
+        <div>
+          <div class="eyebrow">Équipements &amp; services</div>
+          <h2 class="lx-equip-title">Tout pour<br><em>être au top.</em></h2>
+        </div>
+        <p class="lx-equip-sub">Des équipements choisis pour le confort de nos équipes et la qualité de l'accueil de nos clients.</p>
+      </div>
+      <div class="lx-equip-grid">
+        <div class="lx-equip-card" data-reveal>
+          <div class="lx-equip-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="lx-equip-name">Bureaux individuels</h3>
+          <p class="lx-equip-desc">Chaque collaborateur dispose de son propre bureau, équipé de double écran, bureau à hauteur réglable et siège ergonomique.</p>
+        </div>
+        <div class="lx-equip-card" data-reveal style="transition-delay:.1s">
+          <div class="lx-equip-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="lx-equip-name">Salle de réunion</h3>
+          <p class="lx-equip-desc">Capacité 30 personnes, mobilier modulable, écran de projection, visioconférence et fibre optique. Accès indépendant depuis l'extérieur.</p>
+        </div>
+        <div class="lx-equip-card" data-reveal style="transition-delay:.2s">
+          <div class="lx-equip-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+          </div>
+          <h3 class="lx-equip-name">Parking privatif</h3>
+          <p class="lx-equip-desc">Un parking privé gratuit réservé à nos clients et collaborateurs, accessible directement depuis le cabinet.</p>
+        </div>
+        <div class="lx-equip-card" data-reveal style="transition-delay:.3s">
+          <div class="lx-equip-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="lx-equip-name">Accessibilité PMR</h3>
+          <p class="lx-equip-desc">L'ensemble de nos locaux est accessible aux personnes à mobilité réduite — entrée, bureaux et sanitaires adaptés.</p>
+        </div>
+        <div class="lx-equip-card" data-reveal style="transition-delay:.4s">
+          <div class="lx-equip-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 class="lx-equip-name">Espace convivial</h3>
+          <p class="lx-equip-desc">Un espace de détente collaboratif avec fresques murales participatives — pour souffler entre deux dossiers.</p>
+        </div>
+        <div class="lx-equip-card" data-reveal style="transition-delay:.5s">
+          <div class="lx-equip-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="lx-equip-name">Sport &amp; douche</h3>
+          <p class="lx-equip-desc">Une douche sur place pour les collaborateurs sportifs — course à pied, musculation — avant ou après leur journée.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== GALERIE ======================== -->
+  <section class="lx-gallery">
+    <div class="lx-gallery-inner">
+      <div class="lx-gallery-header" data-reveal>
+        <div class="eyebrow">Visite virtuelle</div>
+        <h2 class="lx-gallery-title">
+          Découvrez<br><em>nos espaces.</em>
+        </h2>
+      </div>
+      <div class="lx-mosaic" id="lx-mosaic">
+        <div class="lx-mosaic-item lx-m1" data-img="images/nos locaux/imgi_7_IMG_0817-scaled.jpg"><img src="images/nos locaux/imgi_7_IMG_0817-scaled.jpg" alt="Bureau"></div>
+        <div class="lx-mosaic-item lx-m2" data-img="images/nos locaux/imgi_5_IMG_5827-1024x768.jpg"><img src="images/nos locaux/imgi_5_IMG_5827-1024x768.jpg" alt="Bureau"></div>
+        <div class="lx-mosaic-item lx-m3" data-img="images/nos locaux/imgi_8_IMG_5821.jpg"><img src="images/nos locaux/imgi_8_IMG_5821.jpg" alt="Espace"></div>
+        <div class="lx-mosaic-item lx-m4" data-img="images/nos locaux/imgi_9_IMG_5820.jpg"><img src="images/nos locaux/imgi_9_IMG_5820.jpg" alt="Bureau"></div>
+        <div class="lx-mosaic-item lx-m5" data-img="images/nos locaux/imgi_10_IMG_5826.jpg"><img src="images/nos locaux/imgi_10_IMG_5826.jpg" alt="Bureau"></div>
+        <div class="lx-mosaic-item lx-m6" data-img="images/nos locaux/imgi_6_Project_20230222_0045-1024x683.jpg"><img src="images/nos locaux/imgi_6_Project_20230222_0045-1024x683.jpg" alt="Salle de réunion"></div>
+        <div class="lx-mosaic-item lx-m7" data-img="images/nos locaux/imgi_4_IMG_5829.jpg"><img src="images/nos locaux/imgi_4_IMG_5829.jpg" alt="Locaux"></div>
+        <div class="lx-mosaic-item lx-m8" data-img="images/nos locaux/imgi_12_Project_20220613_0002.jpg"><img src="images/nos locaux/imgi_12_Project_20220613_0002.jpg" alt="Espace"></div>
+        <div class="lx-mosaic-item lx-m9" data-img="images/nos locaux/imgi_2_20220613_182532.jpg"><img src="images/nos locaux/imgi_2_20220613_182532.jpg" alt="Bureau"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lx-lightbox" id="lx-lb">
+    <button class="lx-lb-close" id="lx-lb-close">✕</button>
+    <button class="lx-lb-nav lx-lb-prev" id="lx-lb-prev">&#8592;</button>
+    <img id="lx-lb-img" src="" alt="">
+    <button class="lx-lb-nav lx-lb-next" id="lx-lb-next">&#8594;</button>
+  </div>
+
+  <!-- ======================== LOCALISATION ======================== -->
+  <section class="lx-location">
+    <div class="lx-location-grid">
+      <div class="lx-map-wrap">
+        <iframe
+          src="https://maps.google.com/maps?q=217+avenue+du+Corps+Franc-Pommi%C3%A8s+40280+Saint-Pierre-du-Mont+France&output=embed"
+          allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localisation Sogexa">
+        </iframe>
+      </div>
+      <div class="lx-contact-panel" data-reveal>
+        <div class="eyebrow">Nous trouver</div>
+        <h2 class="lx-contact-title">
+          Venez nous<br><em>rendre visite.</em>
+        </h2>
+        <div class="lx-info-block">
+          <div class="lx-info-label">Adresse</div>
+          <div class="lx-info-val">217 avenue du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont</div>
+        </div>
+        <div class="lx-info-block">
+          <div class="lx-info-label">Téléphone</div>
+          <a href="tel:0558062664" class="lx-info-phone">05 58 06 26 64</a>
+        </div>
+        <div class="lx-info-block">
+          <div class="lx-info-label">Horaires</div>
+          <div class="lx-info-val">Lundi — Vendredi<br>9 h – 12 h &nbsp;/&nbsp; 13 h 30 – 17 h 30</div>
+        </div>
+        <a href="contact.html" class="btn-primary" style="margin-top:16px;align-self:flex-start">
+          Prendre rendez-vous →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa" style="height:32px;width:auto;filter:invert(1) hue-rotate(180deg)">
+        <p class="footer-desc">Cabinet d'expertise comptable indépendant à Saint-Pierre-du-Mont, Landes.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Cabinet</div>
+        <div class="footer-link">Notre cabinet</div>
+        <a class="footer-link" href="locaux.html">Nos locaux</a>
+        <a class="footer-link" href="equipe.html">Notre équipe</a>
+        <a class="footer-link" href="rejoindre.html">Nous rejoindre</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Missions</div>
+        <a class="footer-link" href="missions.html#expertise">L'expertise comptable</a>
+        <a class="footer-link" href="missions.html#social">La gestion sociale &amp; RH</a>
+        <a class="footer-link" href="missions.html#conseil">Conseil &amp; gestion</a>
+        <a class="footer-link" href="missions.html#juridique">Juridique &amp; fiscal</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-link">05 58 06 26 64</div>
+        <div class="footer-link">sogexa@sogexa.fr</div>
+        <div class="footer-link" style="line-height:1.5">217 av. du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Sogexa. Tous droits réservés.</div>
+      <div class="footer-legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ─────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('[data-reveal],[data-reveal-left],[data-reveal-right]').forEach(el => observer.observe(el));
+
+    // ── Lightbox ──────────────────────────────────────────────────
+    const lb     = document.getElementById('lx-lb');
+    const lbImg  = document.getElementById('lx-lb-img');
+    const items  = [...document.querySelectorAll('.lx-mosaic-item')];
+    let lbCur    = 0;
+
+    function openLb(idx) {
+      lbCur = idx;
+      lbImg.src = items[idx].dataset.img;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    function prevLb()  { openLb((lbCur - 1 + items.length) % items.length); }
+    function nextLb()  { openLb((lbCur + 1) % items.length); }
+
+    items.forEach((el, i) => el.addEventListener('click', () => openLb(i)));
+    document.getElementById('lx-lb-close').addEventListener('click', closeLb);
+    document.getElementById('lx-lb-prev').addEventListener('click', prevLb);
+    document.getElementById('lx-lb-next').addEventListener('click', nextLb);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLb();
+      if (e.key === 'ArrowLeft')  prevLb();
+      if (e.key === 'ArrowRight') nextLb();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Client — SOGEXA · Cabinet d'expertise comptable · Landes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      color: #1f1d1a;
+      background: #fbf9f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; }
+
+    :root {
+      --orange: #F39200;
+      --orange-deep: #d97a00;
+      --dark: #1f1d1a;
+      --cream: #fbf9f5;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px;
+      background: rgba(31,29,26,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav-logo { height: 38px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link {
+      font-size: 14px; font-weight: 500; letter-spacing: .02em;
+      color: rgba(255,255,255,.7);
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .nav-cta {
+      background: var(--orange); color: #fff;
+      padding: 9px 22px; border-radius: 6px;
+      font-size: 14px; font-weight: 600;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--orange-deep); border-bottom-color: transparent; }
+
+    /* ── Main layout ── */
+    .ec-wrap {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── Left panel ── */
+    .ec-left {
+      background: var(--dark);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 64px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ec-left::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0; width: 5px;
+      background: var(--orange);
+    }
+    .ec-left-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(243,146,0,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(243,146,0,.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .ec-left-content { position: relative; z-index: 1; }
+    .ec-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(243,146,0,.12);
+      border: 1px solid rgba(243,146,0,.25);
+      color: var(--orange);
+      font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .ec-badge::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(1.3); }
+    }
+    .ec-left h1 {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .ec-left h1 em {
+      font-style: italic;
+      color: var(--orange);
+    }
+    .ec-left-desc {
+      font-size: 16px; line-height: 1.7;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 48px;
+      max-width: 420px;
+    }
+    .ec-features {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .ec-feature {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .ec-feature-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(243,146,0,.1);
+      border: 1px solid rgba(243,146,0,.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ec-feature-icon svg { width: 18px; height: 18px; color: var(--orange); }
+    .ec-feature-text strong {
+      display: block; font-size: 14px; font-weight: 600;
+      color: #fff; margin-bottom: 2px;
+    }
+    .ec-feature-text span {
+      font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.5;
+    }
+    .ec-left-footer {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ec-left-footer img { height: 28px; opacity: .5; filter: brightness(0) invert(1); }
+    .ec-left-footer span {
+      font-size: 12px; color: rgba(255,255,255,.3);
+    }
+
+    /* ── Right panel ── */
+    .ec-right {
+      display: flex; align-items: center; justify-content: center;
+      padding: 120px 64px 80px;
+      background: var(--cream);
+    }
+    .ec-form-box {
+      width: 100%; max-width: 420px;
+    }
+    .ec-form-logo {
+      margin-bottom: 40px;
+    }
+    .ec-form-logo img { height: 42px; }
+    .ec-form-title {
+      font-size: 1.8rem; margin-bottom: 8px;
+      color: var(--dark);
+    }
+    .ec-form-sub {
+      font-size: 15px; color: rgba(31,29,26,.5);
+      margin-bottom: 40px; line-height: 1.5;
+    }
+
+    /* Form fields */
+    .ec-field {
+      margin-bottom: 20px;
+    }
+    .ec-label {
+      display: block;
+      font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(31,29,26,.5);
+      margin-bottom: 8px;
+    }
+    .ec-input-wrap {
+      position: relative;
+    }
+    .ec-input-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      color: rgba(31,29,26,.3);
+      pointer-events: none;
+    }
+    .ec-input-icon svg { width: 16px; height: 16px; }
+    .ec-input {
+      width: 100%;
+      padding: 13px 14px 13px 42px;
+      border: 1.5px solid rgba(31,29,26,.15);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--dark);
+      background: #fff;
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .ec-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(243,146,0,.12);
+    }
+    .ec-input::placeholder { color: rgba(31,29,26,.3); }
+
+    .ec-pass-toggle {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; padding: 0;
+      color: rgba(31,29,26,.3); cursor: pointer;
+      transition: color .2s;
+    }
+    .ec-pass-toggle:hover { color: var(--dark); }
+    .ec-pass-toggle svg { width: 18px; height: 18px; display: block; }
+
+    .ec-field-meta {
+      display: flex; justify-content: flex-end;
+      margin-top: 8px;
+    }
+    .ec-forgot {
+      font-size: 13px; color: var(--orange);
+      transition: color .2s;
+    }
+    .ec-forgot:hover { color: var(--orange-deep); }
+
+    .ec-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 15px; font-weight: 600;
+      border: none; border-radius: 8px;
+      margin-top: 28px;
+      transition: background .2s, transform .1s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .ec-submit:hover { background: var(--orange-deep); }
+    .ec-submit:active { transform: scale(.98); }
+    .ec-submit svg { width: 16px; height: 16px; }
+
+    .ec-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 28px 0;
+      color: rgba(31,29,26,.3); font-size: 13px;
+    }
+    .ec-divider::before, .ec-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(31,29,26,.12);
+    }
+
+    .ec-welyb-btn {
+      width: 100%;
+      padding: 13px;
+      background: #fff;
+      border: 1.5px solid rgba(31,29,26,.15);
+      border-radius: 8px;
+      font-size: 14px; font-weight: 500;
+      color: var(--dark);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: border-color .2s, box-shadow .2s;
+      text-decoration: none;
+    }
+    .ec-welyb-btn:hover {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(243,146,0,.08);
+    }
+    .ec-welyb-btn img { height: 18px; }
+
+    .ec-form-note {
+      margin-top: 32px; text-align: center;
+      font-size: 12px; color: rgba(31,29,26,.35); line-height: 1.6;
+    }
+    .ec-form-note a { color: var(--orange); }
+
+    /* ── Footer strip ── */
+    .ec-footer {
+      background: var(--dark);
+      padding: 20px 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .ec-footer-left {
+      font-size: 13px; color: rgba(255,255,255,.3);
+    }
+    .ec-footer-right {
+      display: flex; gap: 24px;
+    }
+    .ec-footer-right a {
+      font-size: 13px; color: rgba(255,255,255,.3);
+      transition: color .2s;
+    }
+    .ec-footer-right a:hover { color: var(--orange); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .ec-wrap { grid-template-columns: 1fr; }
+      .ec-left { display: none; }
+      .ec-right { padding: 100px 24px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <header class="nav">
+    <a href="index.html">
+      <img class="nav-logo" src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="index.html#accueil">Accueil</a>
+      <a class="nav-link" href="equipe.html">Notre équipe</a>
+      <a class="nav-link" href="missions.html">Nos missions</a>
+      <a class="nav-link" href="locaux.html">Nos locaux</a>
+      <a class="nav-link" href="rejoindre.html">Nous rejoindre</a>
+      <a class="nav-link" href="contact.html">Nous contacter</a>
+      <a class="nav-link nav-cta active" href="espace-client.html">Espace client</a>
+    </nav>
+  </header>
+
+  <!-- ── Main ── -->
+  <main class="ec-wrap">
+
+    <!-- Left -->
+    <div class="ec-left">
+      <div class="ec-left-bg"></div>
+      <div class="ec-left-content">
+
+        <div class="ec-badge">Portail sécurisé</div>
+
+        <h1>Votre espace<br><em>personnel</em> en ligne</h1>
+        <p class="ec-left-desc">Accédez à l'ensemble de vos documents comptables, échangez avec votre expert en toute sécurité et suivez vos dossiers en temps réel.</p>
+
+        <div class="ec-features">
+          <div class="ec-feature">
+            <div class="ec-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+              </svg>
+            </div>
+            <div class="ec-feature-text">
+              <strong>Documents disponibles 24h/24</strong>
+              <span>Bilans, liasses fiscales, bulletins de paie — accessibles à tout moment.</span>
+            </div>
+          </div>
+          <div class="ec-feature">
+            <div class="ec-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="ec-feature-text">
+              <strong>Messagerie sécurisée</strong>
+              <span>Échangez des pièces et messages chiffrés avec votre équipe dédiée.</span>
+            </div>
+          </div>
+          <div class="ec-feature">
+            <div class="ec-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <div class="ec-feature-text">
+              <strong>Données chiffrées</strong>
+              <span>Plateforme Welyb certifiée ISO 27001 — vos données sont protégées.</span>
+            </div>
+          </div>
+          <div class="ec-feature">
+            <div class="ec-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="ec-feature-text">
+              <strong>Suivi en temps réel</strong>
+              <span>Visualisez l'avancement de vos dossiers et les échéances à venir.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="ec-left-footer">
+          <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+          <span>Propulsé par Welyb · Technologie certifiée</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div class="ec-right">
+      <div class="ec-form-box">
+
+        <div class="ec-form-logo">
+          <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+        </div>
+
+        <h2 class="ec-form-title">Connexion</h2>
+        <p class="ec-form-sub">Accédez à votre espace client sécurisé Sogexa.</p>
+
+        <form id="ec-form" onsubmit="handleLogin(event)">
+
+          <div class="ec-field">
+            <label class="ec-label" for="ec-email">Adresse e-mail</label>
+            <div class="ec-input-wrap">
+              <span class="ec-input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </span>
+              <input class="ec-input" type="email" id="ec-email" name="email"
+                placeholder="vous@exemple.fr" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="ec-field">
+            <label class="ec-label" for="ec-password">Mot de passe</label>
+            <div class="ec-input-wrap">
+              <span class="ec-input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </span>
+              <input class="ec-input" type="password" id="ec-password" name="password"
+                placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="ec-pass-toggle" onclick="togglePass()" id="pass-toggle" aria-label="Afficher le mot de passe">
+                <svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+            <div class="ec-field-meta">
+              <a class="ec-forgot" href="https://sogexa.welyb.fr/forgot-password" target="_blank" rel="noopener">Mot de passe oublié ?</a>
+            </div>
+          </div>
+
+          <button type="submit" class="ec-submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+            </svg>
+            Se connecter
+          </button>
+
+        </form>
+
+        <div class="ec-divider">ou</div>
+
+        <a class="ec-welyb-btn" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F39200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          Accéder directement au portail Welyb
+        </a>
+
+        <p class="ec-form-note">
+          Première connexion ou compte non activé ?<br>
+          Contactez votre interlocuteur Sogexa ou écrivez-nous à&nbsp;
+          <a href="mailto:contact@sogexa.fr">contact@sogexa.fr</a>
+        </p>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer class="ec-footer">
+    <span class="ec-footer-left">© 2025 Sogexa — Cabinet d'expertise comptable · Saint-Pierre-du-Mont, Landes</span>
+    <div class="ec-footer-right">
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://sogexa.welyb.fr" target="_blank" rel="noopener">Portail Welyb</a>
+    </div>
+  </footer>
+
+  <script>
+    let passVisible = false;
+    function togglePass() {
+      passVisible = !passVisible;
+      const input = document.getElementById('ec-password');
+      const icon = document.getElementById('eye-icon');
+      input.type = passVisible ? 'text' : 'password';
+      icon.innerHTML = passVisible
+        ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
+        : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('ec-email').value;
+      const password = document.getElementById('ec-password').value;
+      if (email && password) {
+        window.location.href = 'https://sogexa.welyb.fr/signin?redirect=%252Fhome';
+      }
+    }
+  </script>
+
+</body>
+</html>

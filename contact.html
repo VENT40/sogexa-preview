@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — SOGEXA · Cabinet d'expertise comptable · Landes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      color: #1f1d1a; background: #fbf9f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --orange: #F39200;
+      --orange-deep: #d97a00;
+      --dark: #1f1d1a;
+      --cream: #fbf9f5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 400; letter-spacing: -0.02em; margin: 0;
+    }
+
+    [data-reveal] {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal].revealed { opacity: 1; transform: none; }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 14px 28px; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit;
+    }
+    .btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+    /* ── NAV ── */
+    .nav {
+      background: #fbf9f5; border-bottom: 1px solid #ece6da;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { height: 32px; width: auto; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link {
+      color: #2c2a26; font-size: 14px; font-weight: 500;
+      padding: 8px 0; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .nav-cta { padding: 10px 18px; font-size: 12px; }
+
+    /* ════════════════════════════════════════
+       MAIN SPLIT LAYOUT
+    ════════════════════════════════════════ */
+    .ct-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 73px);
+    }
+
+    /* ── LEFT: Info panel ── */
+    .ct-info {
+      background: #1f1d1a;
+      padding: 96px 72px 80px 56px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .ct-info::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 5px; background: var(--orange);
+    }
+    /* Large decorative number */
+    .ct-info::after {
+      content: '?';
+      position: absolute; bottom: -40px; right: -20px;
+      font-family: 'Source Serif 4', serif;
+      font-size: 320px; line-height: 1; font-style: italic;
+      color: rgba(255,255,255,.03); pointer-events: none;
+      letter-spacing: -0.04em;
+    }
+    .ct-info-top { position: relative; z-index: 1; }
+    .ct-title {
+      font-size: clamp(44px, 5vw, 72px);
+      line-height: 1.05; color: #fbf9f5;
+      margin: 20px 0 28px;
+    }
+    .ct-title em { color: var(--orange); font-style: italic; }
+    .ct-desc {
+      font-size: 16px; line-height: 1.75; color: #8a8276;
+      max-width: 440px; margin: 0;
+    }
+
+    /* Info blocks */
+    .ct-info-blocks { position: relative; z-index: 1; margin-top: 64px; }
+    .ct-block {
+      display: flex; gap: 24px; align-items: flex-start;
+      padding: 28px 0; border-top: 1px solid #2e2b26;
+    }
+    .ct-block:last-child { border-bottom: 1px solid #2e2b26; }
+    .ct-block-icon {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(243,146,0,.1); border: 1px solid rgba(243,146,0,.25);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .ct-block-icon svg { width: 18px; height: 18px; stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .ct-block-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 8px;
+    }
+    .ct-block-val {
+      font-size: 16px; color: #c8bfa8; line-height: 1.55;
+    }
+    .ct-block-val a { transition: color .2s; }
+    .ct-block-val a:hover { color: var(--orange); }
+    .ct-phone {
+      font-family: 'Source Serif 4', serif;
+      font-size: 28px; color: var(--orange); line-height: 1;
+    }
+
+    /* ── RIGHT: Form panel ── */
+    .ct-form-panel {
+      background: #fbf9f5;
+      padding: 96px 64px 80px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .ct-form-heading { font-size: clamp(28px, 3vw, 40px); margin: 16px 0 40px; line-height: 1.15; }
+    .ct-form-heading em { color: var(--orange); font-style: italic; }
+
+    /* Form */
+    .ct-form { display: flex; flex-direction: column; gap: 0; }
+    .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ct-field { margin-bottom: 24px; position: relative; }
+    .ct-label {
+      display: block; font-size: 11px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #9a9184; margin-bottom: 10px;
+    }
+    .ct-input, .ct-select, .ct-textarea {
+      width: 100%; background: transparent;
+      border: none; border-bottom: 1.5px solid #d8d1bf;
+      color: #1f1d1a; padding: 10px 0;
+      font-size: 16px; font-family: inherit;
+      outline: none; transition: border-color .25s;
+    }
+    .ct-input:focus, .ct-select:focus, .ct-textarea:focus { border-bottom-color: var(--orange); }
+    .ct-input::placeholder, .ct-textarea::placeholder { color: #c8bfa8; }
+    .ct-select { appearance: none; cursor: pointer; }
+    .ct-select option { background: #fbf9f5; }
+    .ct-textarea { resize: vertical; min-height: 120px; }
+    .ct-submit { align-self: flex-start; margin-top: 8px; }
+    .ct-submit-full { width: 100%; justify-content: center; margin-top: 8px; }
+
+    /* Confirmation message */
+    .ct-confirm {
+      display: none; margin-top: 20px;
+      padding: 16px 20px; background: rgba(243,146,0,.1);
+      border-left: 3px solid var(--orange);
+      font-size: 15px; color: #5a564e; line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════
+       MAP
+    ════════════════════════════════════════ */
+    .ct-map { position: relative; height: 420px; }
+    .ct-map iframe {
+      width: 100%; height: 100%; border: 0; display: block;
+      filter: grayscale(.25) contrast(.95);
+    }
+    .ct-map-label {
+      position: absolute; bottom: 32px; left: 48px;
+      background: #1f1d1a; color: #fbf9f5;
+      padding: 20px 28px; display: flex; flex-direction: column; gap: 4px;
+    }
+    .ct-map-label strong { font-size: 15px; font-weight: 600; }
+    .ct-map-label span { font-size: 13px; color: #8a8276; }
+
+    /* ── FOOTER ── */
+    .footer { background: #0a0a0a; color: #a3a3a3; padding: 80px 48px 40px; }
+    .footer-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid #262626; margin-bottom: 40px;
+    }
+    .footer-desc { margin-top: 24px; font-size: 14px; line-height: 1.6; max-width: 320px; }
+    .footer-col-title { font-size: 13px; color: #fff; margin-bottom: 16px; font-weight: 600; }
+    .footer-link { font-size: 14px; margin-bottom: 10px; cursor: pointer; transition: color .2s; }
+    .footer-link:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      font-size: 13px; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { transition: color .2s; }
+    .footer-legal a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html">
+        <img class="nav-logo" src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="index.html#accueil">Accueil</a>
+        <a class="nav-link" href="equipe.html">Notre équipe</a>
+        <a class="nav-link" href="missions.html">Nos missions</a>
+        <a class="nav-link" href="locaux.html">Nos locaux</a>
+        <a class="nav-link" href="rejoindre.html">Nous rejoindre</a>
+        <a class="nav-link active" href="contact.html">Nous contacter</a>
+      </nav>
+      <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
+    </div>
+  </header>
+
+  <!-- ======================== MAIN SPLIT ======================== -->
+  <div class="ct-main">
+
+    <!-- LEFT — Info -->
+    <div class="ct-info" data-reveal>
+      <div class="ct-info-top">
+        <div class="eyebrow">§ Nous contacter</div>
+        <h1 class="ct-title">
+          Parlons de<br><em>votre projet.</em>
+        </h1>
+        <p class="ct-desc">
+          Installé à Mont-de-Marsan dans les Landes, Sogexa intervient à vos côtés
+          dans les domaines comptable, fiscal, social et juridique — pour les entreprises
+          de tous les secteurs d'activité.
+        </p>
+      </div>
+
+      <div class="ct-info-blocks">
+        <div class="ct-block">
+          <div class="ct-block-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.97-.97a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="ct-block-label">Téléphone</div>
+            <a href="tel:0558062664" class="ct-phone">05 58 06 26 64</a>
+          </div>
+        </div>
+        <div class="ct-block">
+          <div class="ct-block-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ct-block-label">Email</div>
+            <div class="ct-block-val"><a href="mailto:sogexa@sogexa.fr">sogexa@sogexa.fr</a></div>
+          </div>
+        </div>
+        <div class="ct-block">
+          <div class="ct-block-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="ct-block-label">Horaires</div>
+            <div class="ct-block-val">
+              Lundi — Vendredi<br>
+              9 h – 12 h &nbsp;/&nbsp; 13 h 30 – 17 h 30
+            </div>
+          </div>
+        </div>
+        <div class="ct-block">
+          <div class="ct-block-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ct-block-label">Adresse</div>
+            <div class="ct-block-val">
+              217 avenue du Corps Franc-Pommiès<br>
+              40280 Saint-Pierre-du-Mont
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT — Form -->
+    <div class="ct-form-panel" data-reveal style="transition-delay:.15s">
+      <div class="eyebrow">Une demande ? Un projet ?</div>
+      <h2 class="ct-form-heading">
+        Contactez notre<br><em>équipe de spécialistes.</em>
+      </h2>
+
+      <form class="ct-form" id="ct-form" onsubmit="return handleSubmit(event)">
+        <div class="ct-row">
+          <div class="ct-field">
+            <label class="ct-label" for="nom">Nom</label>
+            <input class="ct-input" id="nom" type="text" placeholder="Dupont" required>
+          </div>
+          <div class="ct-field">
+            <label class="ct-label" for="prenom">Prénom</label>
+            <input class="ct-input" id="prenom" type="text" placeholder="Marie" required>
+          </div>
+        </div>
+        <div class="ct-row">
+          <div class="ct-field">
+            <label class="ct-label" for="tel">Téléphone</label>
+            <input class="ct-input" id="tel" type="tel" placeholder="06 00 00 00 00">
+          </div>
+          <div class="ct-field">
+            <label class="ct-label" for="email">Email</label>
+            <input class="ct-input" id="email" type="email" placeholder="votre@email.fr" required>
+          </div>
+        </div>
+        <div class="ct-field">
+          <label class="ct-label" for="objet">Objet</label>
+          <select class="ct-select" id="objet">
+            <option value="">Sélectionner un domaine</option>
+            <option>Expertise comptable</option>
+            <option>Gestion sociale &amp; RH</option>
+            <option>Conseil &amp; gestion</option>
+            <option>Juridique &amp; fiscal</option>
+            <option>Création / reprise / transmission</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="ct-field">
+          <label class="ct-label" for="message">Message</label>
+          <textarea class="ct-textarea" id="message" placeholder="Décrivez votre demande ou votre projet…" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary ct-submit-full">
+          Envoyer le message →
+        </button>
+        <div class="ct-confirm" id="ct-confirm">
+          ✓ &nbsp;Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================== MAP ======================== -->
+  <div class="ct-map">
+    <iframe
+      src="https://maps.google.com/maps?q=217+avenue+du+Corps+Franc-Pommi%C3%A8s+40280+Saint-Pierre-du-Mont+France&output=embed"
+      allowfullscreen loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Localisation Sogexa">
+    </iframe>
+    <div class="ct-map-label">
+      <strong>Cabinet Sogexa</strong>
+      <span>217 av. du Corps Franc-Pommiès · 40280 Saint-Pierre-du-Mont</span>
+    </div>
+  </div>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa"
+          style="height:32px;width:auto;filter:invert(1) hue-rotate(180deg)">
+        <p class="footer-desc">Cabinet d'expertise comptable indépendant à Saint-Pierre-du-Mont, Landes.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Cabinet</div>
+        <div class="footer-link">Notre cabinet</div>
+        <div class="footer-link">Nos locaux</div>
+        <a class="footer-link" href="equipe.html">Notre équipe</a>
+        <a class="footer-link" href="rejoindre.html">Nous rejoindre</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Missions</div>
+        <a class="footer-link" href="missions.html#expertise">L'expertise comptable</a>
+        <a class="footer-link" href="missions.html#social">La gestion sociale &amp; RH</a>
+        <a class="footer-link" href="missions.html#conseil">Conseil &amp; gestion</a>
+        <a class="footer-link" href="missions.html#juridique">Juridique &amp; fiscal</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-link">05 58 06 26 64</div>
+        <div class="footer-link">sogexa@sogexa.fr</div>
+        <div class="footer-link" style="line-height:1.5">
+          217 av. du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Sogexa. Tous droits réservés.</div>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    // Form submit
+    function handleSubmit(e) {
+      e.preventDefault();
+      const confirm = document.getElementById('ct-confirm');
+      confirm.style.display = 'block';
+      e.target.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+      return false;
+    }
+  </script>
+</body>
+</html>

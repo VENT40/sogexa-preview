@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos missions — SOGEXA · Cabinet d'expertise comptable · Landes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      color: #1f1d1a;
+      background: #fbf9f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --orange: #F39200;
+      --orange-deep: #d97a00;
+      --dark: #1f1d1a;
+      --cream: #fbf9f5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    /* ── Reveal ── */
+    [data-reveal] {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal].revealed { opacity: 1; transform: none; }
+    [data-reveal-left] {
+      opacity: 0; transform: translateX(-56px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal-left].revealed { opacity: 1; transform: none; }
+    [data-reveal-right] {
+      opacity: 0; transform: translateX(56px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: .12s;
+    }
+    [data-reveal-right].revealed { opacity: 1; transform: none; }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 14px 28px; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit;
+    }
+    .btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+    /* ── NAV ── */
+    .nav {
+      background: #fbf9f5; border-bottom: 1px solid #ece6da;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { height: 32px; width: auto; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link {
+      color: #2c2a26; font-size: 14px; font-weight: 500;
+      padding: 8px 0; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .nav-cta { padding: 10px 18px; font-size: 12px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #1f1d1a;
+      padding: 120px 48px 100px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0;
+      width: 5px; background: var(--orange);
+    }
+    .hero-inner { max-width: 1280px; margin: 0 auto; }
+    .hero-title {
+      font-size: clamp(52px, 7vw, 96px);
+      line-height: 1.0; color: #fbf9f5;
+      margin: 20px 0 32px;
+    }
+    .hero-title em { color: var(--orange); font-style: italic; }
+    .hero-subtitle {
+      font-size: 19px; line-height: 1.65; color: #8a8276;
+      max-width: 640px; margin: 0 0 64px;
+    }
+    .hero-industries {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .industry-badge {
+      padding: 9px 18px; border: 1px solid #3a3730;
+      font-size: 13px; font-weight: 500; color: #c8bfa8;
+      letter-spacing: .04em;
+      transition: border-color .25s, color .25s;
+    }
+    .industry-badge:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── MISSION BLOCK ── */
+    .mission-block {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+    .mission-photo {
+      overflow: hidden; position: relative;
+    }
+    .mission-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 20%;
+      display: block;
+      transition: transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    .mission-block:hover .mission-photo img { transform: scale(1.03); }
+    .mission-photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(31,29,26,.18) 0%, transparent 60%);
+    }
+
+    .mission-content {
+      padding: 80px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative;
+    }
+    .mission-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 120px; line-height: 1;
+      color: #ece6da; font-weight: 300;
+      position: absolute; top: 40px; right: 56px;
+      letter-spacing: -0.04em; user-select: none;
+    }
+    .mission-title {
+      font-size: clamp(28px, 2.8vw, 38px);
+      line-height: 1.15; margin: 20px 0 28px;
+    }
+    .mission-title em { color: var(--orange); font-style: italic; }
+    .mission-list {
+      list-style: none; padding: 0; margin: 0 0 40px;
+    }
+    .mission-list li {
+      font-size: 15px; line-height: 1.6; color: #5a564e;
+      padding: 10px 0; border-bottom: 1px solid #ece6da;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .mission-list li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange); flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* alternating backgrounds */
+    .bg-cream  { background: #fbf9f5; }
+    .bg-warm   { background: #faf6ec; border-top: 1px solid #ece6da; border-bottom: 1px solid #ece6da; }
+    .bg-beige  { background: #f4eee2; }
+
+    /* ── OUTILS SECTION ── */
+    .outils-section { background: #1f1d1a; padding: 100px 48px; }
+    .outils-inner { max-width: 1280px; margin: 0 auto; }
+    .outils-header { margin-bottom: 72px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+    .outils-title { font-size: clamp(36px, 4vw, 52px); line-height: 1.1; margin-top: 16px; color: #fbf9f5; }
+    .outils-title em { color: var(--orange); font-style: italic; }
+    .outils-subtitle { font-size: 16px; line-height: 1.65; color: #8a8276; max-width: 420px; }
+    .outils-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .outil-card {
+      background: #2a2823; padding: 48px 40px 56px;
+      position: relative; overflow: hidden;
+      transition: background .4s, transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .outil-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .outil-card:hover { background: #322f28; transform: translateY(-6px); }
+    .outil-card:hover::before { transform: scaleX(1); }
+    .outil-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(243,146,0,.12); border: 1.5px solid rgba(243,146,0,.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 32px;
+      transition: background .4s, border-color .4s;
+    }
+    .outil-card:hover .outil-icon { background: rgba(243,146,0,.22); border-color: var(--orange); }
+    .outil-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .outil-name { font-size: 22px; color: #fbf9f5; margin: 0 0 14px; }
+    .outil-desc { font-size: 15px; line-height: 1.75; color: #8a8276; margin: 0; }
+
+    /* ── CTA ── */
+    .cta-section { background: var(--orange); padding: 88px 48px; }
+    .cta-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    }
+    .cta-title {
+      font-size: clamp(32px, 3.5vw, 48px);
+      color: #fff; line-height: 1.15;
+    }
+    .cta-sub { font-size: 17px; color: rgba(255,255,255,.8); margin-top: 12px; }
+    .btn-white {
+      background: #fff; color: var(--orange);
+      padding: 16px 32px; font-weight: 700; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer; white-space: nowrap;
+      transition: background .25s, transform .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit; flex-shrink: 0;
+    }
+    .btn-white:hover { background: #f5f5f5; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    .footer { background: #0a0a0a; color: #a3a3a3; padding: 80px 48px 40px; }
+    .footer-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid #262626; margin-bottom: 40px;
+    }
+    .footer-desc { margin-top: 24px; font-size: 14px; line-height: 1.6; max-width: 320px; }
+    .footer-col-title { font-size: 13px; color: #fff; margin-bottom: 16px; font-weight: 600; }
+    .footer-link { font-size: 14px; margin-bottom: 10px; cursor: pointer; transition: color .2s; }
+    .footer-link:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      font-size: 13px; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { transition: color .2s; }
+    .footer-legal a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html">
+        <img class="nav-logo" src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="index.html#accueil">Accueil</a>
+        <a class="nav-link" href="equipe.html">Notre équipe</a>
+        <a class="nav-link active" href="missions.html">Nos missions</a>
+        <a class="nav-link" href="locaux.html">Nos locaux</a>
+        <a class="nav-link" href="index.html#rejoindre">Nous rejoindre</a>
+        <a class="nav-link" href="contact.html">Nous contacter</a>
+      </nav>
+      <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
+    </div>
+  </header>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div data-reveal>
+        <div class="eyebrow">§ Nos missions</div>
+        <h1 class="hero-title">
+          Votre entreprise,<br><em>à chaque étape.</em>
+        </h1>
+        <p class="hero-subtitle">
+          Le cabinet Sogexa vous accompagne dans toutes les étapes de la vie de votre entreprise —
+          de la création à la transmission, en passant par la gestion quotidienne.
+        </p>
+        <div class="hero-industries">
+          <span class="industry-badge">Commerce</span>
+          <span class="industry-badge">Industrie</span>
+          <span class="industry-badge">Professions libérales</span>
+          <span class="industry-badge">Agriculture</span>
+          <span class="industry-badge">Associations</span>
+          <span class="industry-badge">Particuliers</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MISSION 1 — CRÉATION ======================== -->
+  <section class="mission-block bg-cream" id="creation">
+    <div class="mission-photo" data-reveal-left>
+      <img src="images/David baslé.jpg"
+           alt="David Baslé — Associé Sogexa">
+      <div class="mission-photo-overlay"></div>
+    </div>
+    <div class="mission-content" data-reveal-right>
+      <span class="mission-num">01</span>
+      <div class="eyebrow">Création · Reprise · Transmission</div>
+      <h2 class="mission-title">
+        Votre projet prend forme,<br><em>nous l'accompagnons.</em>
+      </h2>
+      <ul class="mission-list">
+        <li>Choix de la structure juridique adaptée à votre situation</li>
+        <li>Établissement d'un budget prévisionnel réaliste</li>
+        <li>Accompagnement bancaire pour le financement de votre projet</li>
+        <li>Analyse des aspects juridiques, comptables, fiscaux et sociaux lors d'une reprise</li>
+        <li>Valorisation et accompagnement lors de la cession ou transmission</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================== MISSION 2 — CONSEIL ======================== -->
+  <section class="mission-block bg-warm" id="conseil">
+    <div class="mission-content" data-reveal-left style="transition-delay:0s">
+      <span class="mission-num" style="left:56px;right:auto">02</span>
+      <div class="eyebrow">Conseil &amp; gestion</div>
+      <h2 class="mission-title">
+        Des outils de pilotage<br><em>pour décider vite.</em>
+      </h2>
+      <ul class="mission-list">
+        <li>Situations comptables intermédiaires et points de gestion réguliers</li>
+        <li>Budgets prévisionnels et plans de financement</li>
+        <li>Mise en place de tableaux de bord sur-mesure</li>
+        <li>Calcul de coûts et comptabilité analytique</li>
+        <li>Conseil en droit social et accompagnement RH stratégique</li>
+      </ul>
+    </div>
+    <div class="mission-photo" data-reveal-right>
+      <img src="https://www.sogexa.fr/wp-content/uploads/2023/08/Project_20230222_0038-1024x683.jpeg"
+           alt="Conseil et gestion">
+      <div class="mission-photo-overlay"></div>
+    </div>
+  </section>
+
+  <!-- ======================== MISSION 3 — EXPERTISE ======================== -->
+  <section class="mission-block bg-beige" id="expertise">
+    <div class="mission-photo" data-reveal-left>
+      <img src="images/imgi_4_IMG_0057-2-scaled-qgpx22sbrthkes5ln83z3g6my9q3pcpl57xz1dflv4.jpg"
+           alt="Expertise comptable">
+      <div class="mission-photo-overlay"></div>
+    </div>
+    <div class="mission-content" data-reveal-right>
+      <span class="mission-num">03</span>
+      <div class="eyebrow">Expertise comptable</div>
+      <h2 class="mission-title">
+        Vos comptes,<br><em>en toute rigueur.</em>
+      </h2>
+      <ul class="mission-list">
+        <li>Organisation et adaptation de votre système comptable</li>
+        <li>Tenue ou surveillance de la comptabilité</li>
+        <li>Établissement des comptes annuels — bilan, compte de résultat, annexes</li>
+        <li>Déclarations fiscales annuelles et liasse fiscale</li>
+        <li>Révision et certification des comptes</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================== MISSION 4 — SOCIAL ======================== -->
+  <section class="mission-block bg-warm" id="social">
+    <div class="mission-content" data-reveal-left style="transition-delay:0s">
+      <span class="mission-num" style="left:56px;right:auto">04</span>
+      <div class="eyebrow">Gestion sociale &amp; RH</div>
+      <h2 class="mission-title">
+        Votre équipe,<br><em>sans la charge administrative.</em>
+      </h2>
+      <ul class="mission-list">
+        <li>Gestion du personnel — entrées, sorties, contrats de travail</li>
+        <li>Établissement des bulletins de salaire chaque mois</li>
+        <li>Dépôt des déclarations sociales (DSN, URSSAF, retraite…)</li>
+        <li>Veille réglementaire sociale et conseils au quotidien</li>
+        <li>Accompagnement lors des contrôles URSSAF et inspections du travail</li>
+      </ul>
+    </div>
+    <div class="mission-photo" data-reveal-right>
+      <img src="images/gestion sociale.jpg"
+           alt="Gestion sociale et RH">
+      <div class="mission-photo-overlay"></div>
+    </div>
+  </section>
+
+  <!-- ======================== MISSION 5 — JURIDIQUE ======================== -->
+  <section class="mission-block bg-cream" id="juridique">
+    <div class="mission-photo" data-reveal-left>
+      <img src="images/gestion juridique.jpeg"
+           alt="Domaine juridique">
+      <div class="mission-photo-overlay"></div>
+    </div>
+    <div class="mission-content" data-reveal-right>
+      <span class="mission-num">05</span>
+      <div class="eyebrow">Domaine juridique &amp; fiscal</div>
+      <h2 class="mission-title">
+        La sécurité juridique<br><em>au cœur de votre gestion.</em>
+      </h2>
+      <ul class="mission-list">
+        <li>Création et immatriculation de sociétés (SAS, SARL, SCI…)</li>
+        <li>Secrétariat juridique annuel — PV d'assemblées, rapports de gestion</li>
+        <li>Rédaction de statuts et conventions entre associés</li>
+        <li>Fiscalité personnelle et professionnelle — optimisation et déclarations</li>
+        <li>Accompagnement lors des contrôles fiscaux</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================== OUTILS NUMÉRIQUES ======================== -->
+  <section class="outils-section" id="outils">
+    <div class="outils-inner">
+      <div class="outils-header" data-reveal>
+        <div>
+          <div class="eyebrow">Vos outils</div>
+          <h2 class="outils-title">
+            Une plateforme digitale<br><em>à votre service.</em>
+          </h2>
+        </div>
+        <p class="outils-subtitle">
+          Des solutions connectées pour simplifier vos échanges avec le cabinet,
+          automatiser vos flux et gagner en temps et en sérénité.
+        </p>
+      </div>
+      <div class="outils-grid">
+        <div class="outil-card" data-reveal>
+          <div class="outil-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <h3 class="outil-name">GED collaborative</h3>
+          <p class="outil-desc">Échangez vos documents en toute sécurité depuis votre espace client. Accès 24h/24 à vos pièces comptables et fiscales.</p>
+        </div>
+        <div class="outil-card" data-reveal style="transition-delay:.1s">
+          <div class="outil-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="outil-name">Quadra Web</h3>
+          <p class="outil-desc">Logiciel de gestion comptable en ligne, partagé avec votre équipe Sogexa pour une collaboration en temps réel sur vos données.</p>
+        </div>
+        <div class="outil-card" data-reveal style="transition-delay:.2s">
+          <div class="outil-icon">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="outil-name">MEG Facturation</h3>
+          <p class="outil-desc">Créez et envoyez vos factures en quelques clics. Intégration automatique dans votre comptabilité, sans ressaisie.</p>
+        </div>
+        <div class="outil-card" data-reveal style="transition-delay:.3s">
+          <div class="outil-icon">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <h3 class="outil-name">MEG Caisse</h3>
+          <p class="outil-desc">Solution d'encaissement connectée à votre comptabilité. Vos recettes de caisse remontent automatiquement chaque jour.</p>
+        </div>
+        <div class="outil-card" data-reveal style="transition-delay:.4s">
+          <div class="outil-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="outil-name">Intégration automatisée</h3>
+          <p class="outil-desc">Vos flux bancaires, vos achats et ventes s'intègrent directement dans votre comptabilité — sans saisie manuelle.</p>
+        </div>
+        <div class="outil-card" data-reveal style="transition-delay:.5s">
+          <div class="outil-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="outil-name">Espace client sécurisé</h3>
+          <p class="outil-desc">Accédez à tout moment à vos documents officiels, bilans et déclarations dans un espace personnel chiffré et sécurisé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== CTA ======================== -->
+  <section class="cta-section">
+    <div class="cta-inner" data-reveal>
+      <div>
+        <h2 class="cta-title">Un projet ? Une question ?<br>Parlons-en.</h2>
+        <p class="cta-sub">Notre équipe vous répond sous 24h.</p>
+      </div>
+      <a href="index.html#contact" class="btn-white">Nous contacter →</a>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa"
+          style="height:32px;width:auto;filter:invert(1) hue-rotate(180deg)">
+        <p class="footer-desc">Cabinet d'expertise comptable indépendant à Saint-Pierre-du-Mont, Landes.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Cabinet</div>
+        <div class="footer-link">Notre cabinet</div>
+        <div class="footer-link">Nos locaux</div>
+        <a class="footer-link" href="equipe.html">Notre équipe</a>
+        <div class="footer-link">Nous rejoindre</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Missions</div>
+        <a class="footer-link" href="missions.html#expertise">L'expertise comptable</a>
+        <a class="footer-link" href="missions.html#social">La gestion sociale &amp; RH</a>
+        <a class="footer-link" href="missions.html#conseil">Conseil &amp; gestion</a>
+        <a class="footer-link" href="missions.html#juridique">Juridique &amp; fiscal</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-link">05 58 06 26 64</div>
+        <div class="footer-link">sogexa@sogexa.fr</div>
+        <div class="footer-link" style="line-height:1.5">
+          217 av. du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Sogexa. Tous droits réservés.</div>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('[data-reveal], [data-reveal-left], [data-reveal-right]')
+      .forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

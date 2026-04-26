@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nous rejoindre — SOGEXA · Cabinet d'expertise comptable · Landes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      color: #1f1d1a; background: #fbf9f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --orange: #F39200;
+      --orange-deep: #d97a00;
+      --dark: #1f1d1a;
+      --cream: #fbf9f5;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 400; letter-spacing: -0.02em; margin: 0;
+    }
+
+    /* ── Reveal ── */
+    [data-reveal] {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal].revealed { opacity: 1; transform: none; }
+    [data-reveal-left] {
+      opacity: 0; transform: translateX(-56px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal-left].revealed { opacity: 1; transform: none; }
+    [data-reveal-right] {
+      opacity: 0; transform: translateX(56px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: .12s;
+    }
+    [data-reveal-right].revealed { opacity: 1; transform: none; }
+
+    .eyebrow {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 14px 28px; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit;
+    }
+    .btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+    /* ── NAV ── */
+    .nav {
+      background: #fbf9f5; border-bottom: 1px solid #ece6da;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { height: 32px; width: auto; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link {
+      color: #2c2a26; font-size: 14px; font-weight: 500;
+      padding: 8px 0; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .nav-cta { padding: 10px 18px; font-size: 12px; }
+
+    /* ════════════════════════════════════════
+       DIAPORAMA
+    ════════════════════════════════════════ */
+    .rj-slider-wrap { background: #0d0c0a; }
+
+    /* Main stage */
+    .rj-stage {
+      position: relative; width: 100%; height: 78vh;
+      overflow: hidden; min-height: 500px;
+    }
+
+    /* Slides */
+    .rj-slide {
+      position: absolute; inset: 0;
+      opacity: 0;
+      transition: opacity 1.1s cubic-bezier(.4,0,.2,1);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .rj-slide.active { opacity: 1; }
+
+    /* Blurred background fill */
+    .slide-blur {
+      position: absolute; inset: -32px;
+      background-size: cover; background-position: center;
+      filter: blur(28px) brightness(.32) saturate(.6);
+      z-index: 0;
+    }
+
+    /* Actual photo — full visible, no crop */
+    .rj-slide img {
+      position: relative; z-index: 1;
+      max-width: 100%; max-height: 100%;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      transform-origin: center;
+    }
+    .rj-slide.active img { animation: kb 9s ease-in-out forwards; }
+    @keyframes kb {
+      0%   { transform: scale(1); }
+      100% { transform: scale(1.06); }
+    }
+
+    /* Gradient overlay */
+    .rj-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      background:
+        linear-gradient(90deg, rgba(13,12,10,.65) 0%, rgba(13,12,10,.20) 50%, rgba(13,12,10,0) 100%),
+        linear-gradient(180deg, rgba(13,12,10,0) 55%, rgba(13,12,10,.55) 100%);
+      pointer-events: none;
+    }
+
+    /* Text overlay */
+    .rj-text {
+      position: absolute; inset: 0; z-index: 3;
+      max-width: 1280px; margin: 0 auto; padding: 0 56px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .rj-proverb {
+      font-family: 'Source Serif 4', serif;
+      font-size: clamp(32px, 4.5vw, 60px);
+      font-style: italic; font-weight: 400;
+      line-height: 1.2; color: #fff;
+      max-width: 640px; margin: 20px 0 24px;
+      letter-spacing: -0.02em;
+    }
+    .rj-proverb span { color: var(--orange); }
+    .rj-sub {
+      font-size: 17px; color: rgba(255,255,255,.7);
+      max-width: 440px; line-height: 1.6;
+    }
+
+    /* Counter */
+    .rj-counter {
+      position: absolute; bottom: 40px; left: 56px; z-index: 4;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .rj-count-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13px; color: rgba(255,255,255,.5);
+      letter-spacing: .12em;
+    }
+    .rj-count-num strong { font-size: 22px; color: #fff; font-weight: 400; }
+
+    /* Arrows */
+    .rj-arrows {
+      position: absolute; bottom: 32px; right: 56px; z-index: 4;
+      display: flex; gap: 10px;
+    }
+    .rj-arrow {
+      width: 52px; height: 52px;
+      border: 1.5px solid rgba(255,255,255,.25);
+      background: transparent; color: #fff;
+      font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .25s, background .25s;
+    }
+    .rj-arrow:hover { border-color: var(--orange); background: var(--orange); }
+
+    /* Progress bar */
+    .rj-progress {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 5;
+      height: 3px; background: rgba(255,255,255,.12);
+    }
+    .rj-progress-bar {
+      height: 100%; background: var(--orange); width: 0%;
+    }
+
+    /* Thumbnail strip */
+    .rj-thumbstrip {
+      display: flex; gap: 3px;
+      background: #0d0c0a;
+      padding: 16px 56px 24px;
+      overflow-x: auto; scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .rj-thumbstrip::-webkit-scrollbar { display: none; }
+    .rj-thumb {
+      flex-shrink: 0; width: 110px; height: 64px;
+      overflow: hidden; cursor: pointer;
+      opacity: .35; transition: opacity .3s;
+      outline: 2px solid transparent; outline-offset: 2px;
+      transition: opacity .3s, outline-color .3s;
+    }
+    .rj-thumb:hover { opacity: .65; }
+    .rj-thumb.active { opacity: 1; outline-color: var(--orange); }
+    .rj-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ════════════════════════════════════════
+       POURQUOI NOUS REJOINDRE
+    ════════════════════════════════════════ */
+    .rj-why { background: #1f1d1a; padding: 96px 48px; }
+    .rj-why-inner { max-width: 1280px; margin: 0 auto; }
+    .rj-why-header { margin-bottom: 72px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+    .rj-why-title { font-size: clamp(36px, 4vw, 52px); line-height: 1.1; margin-top: 16px; color: #fbf9f5; }
+    .rj-why-title em { color: var(--orange); font-style: italic; }
+    .rj-why-sub { font-size: 16px; line-height: 1.7; color: #8a8276; max-width: 380px; }
+    .rj-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .rj-why-card {
+      background: #2a2823; padding: 48px 40px 56px;
+      position: relative; overflow: hidden;
+      transition: background .4s, transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .rj-why-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .rj-why-card:hover { background: #322f28; transform: translateY(-6px); }
+    .rj-why-card:hover::before { transform: scaleX(1); }
+    .rj-why-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(243,146,0,.12); border: 1.5px solid rgba(243,146,0,.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 32px;
+      transition: background .4s, border-color .4s;
+    }
+    .rj-why-card:hover .rj-why-icon { background: rgba(243,146,0,.22); border-color: var(--orange); }
+    .rj-why-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .rj-why-name { font-size: 22px; color: #fbf9f5; margin: 0 0 14px; }
+    .rj-why-desc { font-size: 15px; line-height: 1.75; color: #8a8276; margin: 0; }
+
+    /* ════════════════════════════════════════
+       STATS
+    ════════════════════════════════════════ */
+    .rj-stats { background: var(--orange); padding: 64px 48px; }
+    .rj-stats-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px;
+    }
+    .rj-stat { border-left: 2px solid rgba(255,255,255,.4); padding-left: 24px; }
+    .rj-stat-value {
+      font-family: 'Source Serif 4', serif;
+      font-size: 52px; line-height: 1; color: #fff;
+    }
+    .rj-stat-label { font-size: 14px; margin-top: 10px; color: rgba(255,255,255,.8); }
+
+    /* ════════════════════════════════════════
+       STAGE SECTION
+    ════════════════════════════════════════ */
+    .rj-stage-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+    .rj-stage-photo { overflow: hidden; }
+    .rj-stage-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+    }
+    .rj-stage-content {
+      background: #faf6ec; padding: 80px 72px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-top: 1px solid #ece6da; border-bottom: 1px solid #ece6da;
+    }
+    .rj-stage-title { font-size: clamp(28px, 2.8vw, 38px); line-height: 1.2; margin: 16px 0 24px; }
+    .rj-stage-title em { color: var(--orange); font-style: italic; }
+    .rj-stage-text { font-size: 16px; line-height: 1.75; color: #5a564e; margin: 0 0 36px; }
+
+    /* ════════════════════════════════════════
+       CANDIDATURE FORM
+    ════════════════════════════════════════ */
+    .rj-form-section { background: #1f1d1a; padding: 96px 48px; }
+    .rj-form-inner {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .rj-form-title { font-size: clamp(32px, 3.5vw, 48px); color: #fbf9f5; line-height: 1.1; margin: 16px 0 24px; }
+    .rj-form-title em { color: var(--orange); font-style: italic; }
+    .rj-form-text { font-size: 16px; line-height: 1.75; color: #8a8276; margin: 0 0 40px; }
+    .rj-form-info { margin-top: 40px; }
+    .rj-info-block { margin-bottom: 24px; }
+    .rj-info-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #5a564e; margin-bottom: 6px; }
+    .rj-info-val { font-size: 16px; color: #c8bfa8; line-height: 1.5; }
+
+    .rj-form { background: #2a2823; padding: 48px 40px; }
+    .rj-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .rj-input, .rj-textarea {
+      background: transparent; border: none;
+      border-bottom: 1px solid #4a463f;
+      color: #fbf9f5; padding: 14px 0;
+      font-size: 15px; font-family: inherit;
+      outline: none; width: 100%;
+      transition: border-color .25s;
+    }
+    .rj-input:focus, .rj-textarea:focus { border-bottom-color: var(--orange); }
+    .rj-input::placeholder, .rj-textarea::placeholder { color: #6b6259; }
+    .rj-textarea { resize: vertical; margin-bottom: 16px; }
+
+    /* File upload */
+    .rj-upload {
+      border: 1.5px dashed #4a463f; padding: 28px;
+      text-align: center; margin-bottom: 24px; cursor: pointer;
+      transition: border-color .25s, background .25s;
+      position: relative;
+    }
+    .rj-upload:hover { border-color: var(--orange); background: rgba(243,146,0,.05); }
+    .rj-upload input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .rj-upload-icon { font-size: 28px; margin-bottom: 10px; color: var(--orange); }
+    .rj-upload-text { font-size: 14px; color: #6b6259; line-height: 1.5; }
+    .rj-upload-text strong { color: #c8bfa8; }
+    .rj-submit { width: 100%; justify-content: center; }
+
+    /* ── FOOTER ── */
+    .footer { background: #0a0a0a; color: #a3a3a3; padding: 80px 48px 40px; }
+    .footer-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid #262626; margin-bottom: 40px;
+    }
+    .footer-desc { margin-top: 24px; font-size: 14px; line-height: 1.6; max-width: 320px; }
+    .footer-col-title { font-size: 13px; color: #fff; margin-bottom: 16px; font-weight: 600; }
+    .footer-link { font-size: 14px; margin-bottom: 10px; cursor: pointer; transition: color .2s; }
+    .footer-link:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      font-size: 13px; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { transition: color .2s; }
+    .footer-legal a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html">
+        <img class="nav-logo" src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+      </a>
+      <nav class="nav-links">
+        <a class="nav-link" href="index.html#accueil">Accueil</a>
+        <a class="nav-link" href="equipe.html">Notre équipe</a>
+        <a class="nav-link" href="missions.html">Nos missions</a>
+        <a class="nav-link" href="locaux.html">Nos locaux</a>
+        <a class="nav-link active" href="rejoindre.html">Nous rejoindre</a>
+        <a class="nav-link" href="contact.html">Nous contacter</a>
+      </nav>
+      <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
+    </div>
+  </header>
+
+  <!-- ======================== DIAPORAMA ======================== -->
+  <div class="rj-slider-wrap">
+    <div class="rj-stage" id="rj-stage">
+
+      <!-- Slides -->
+      <div class="rj-slide active">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_37_Project_20230703_0024.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_37_Project_20230703_0024.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_19_20221215_162456-2048x1152.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_19_20221215_162456-2048x1152.jpg" alt="Sogexa événement">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_52_IMG_7783.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_52_IMG_7783.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_53_IMG_7813.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_53_IMG_7813.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_54_IMG_7825.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_54_IMG_7825.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_55_IMG_7841.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_55_IMG_7841.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_56_IMG_7847.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_56_IMG_7847.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_57_IMG_7877.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_57_IMG_7877.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_58_IMG_7902.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_58_IMG_7902.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_59_IMG_7913.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_59_IMG_7913.jpg" alt="Sogexa équipe">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_35_Project_20221215_0015.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_35_Project_20221215_0015.jpg" alt="Sogexa événement">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_36_Project_20221215_0023.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_36_Project_20221215_0023.jpg" alt="Sogexa événement">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_22_Project_20221215_0020.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_22_Project_20221215_0020.jpg" alt="Sogexa événement">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_61_20221215_162456-scaled.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_61_20221215_162456-scaled.jpg" alt="Sogexa événement">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_48_Project_20211216_0041.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_48_Project_20211216_0041.jpg" alt="Sogexa cabinet">
+      </div>
+      <div class="rj-slide">
+        <div class="slide-blur" style="background-image:url('images/nous rejoindre/imgi_33_IMG_0016.jpg')"></div>
+        <img src="images/nous rejoindre/imgi_33_IMG_0016.jpg" alt="Sogexa cabinet">
+      </div>
+
+      <!-- Overlay -->
+      <div class="rj-overlay"></div>
+
+      <!-- Text -->
+      <div class="rj-text">
+        <div class="eyebrow">§ Nous rejoindre</div>
+        <p class="rj-proverb">
+          « Seul on va plus vite,<br>
+          <span>ensemble on va plus loin.</span> »
+        </p>
+        <p class="rj-sub">Un cabinet à taille humaine, dans les Landes, où chacun trouve sa place et grandit à son rythme.</p>
+      </div>
+
+      <!-- Counter -->
+      <div class="rj-counter">
+        <span class="rj-count-num"><strong id="rj-cur">01</strong> / <span id="rj-total">16</span></span>
+      </div>
+
+      <!-- Arrows -->
+      <div class="rj-arrows">
+        <button class="rj-arrow" id="rj-prev" aria-label="Précédent">&#8592;</button>
+        <button class="rj-arrow" id="rj-next" aria-label="Suivant">&#8594;</button>
+      </div>
+
+      <!-- Progress -->
+      <div class="rj-progress">
+        <div class="rj-progress-bar" id="rj-progress"></div>
+      </div>
+    </div>
+
+    <!-- Thumbnail strip -->
+    <div class="rj-thumbstrip" id="rj-thumbstrip">
+      <div class="rj-thumb active" data-index="0"><img src="images/nous rejoindre/imgi_37_Project_20230703_0024.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="1"><img src="images/nous rejoindre/imgi_19_20221215_162456-2048x1152.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="2"><img src="images/nous rejoindre/imgi_52_IMG_7783.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="3"><img src="images/nous rejoindre/imgi_53_IMG_7813.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="4"><img src="images/nous rejoindre/imgi_54_IMG_7825.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="5"><img src="images/nous rejoindre/imgi_55_IMG_7841.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="6"><img src="images/nous rejoindre/imgi_56_IMG_7847.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="7"><img src="images/nous rejoindre/imgi_57_IMG_7877.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="8"><img src="images/nous rejoindre/imgi_58_IMG_7902.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="9"><img src="images/nous rejoindre/imgi_59_IMG_7913.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="10"><img src="images/nous rejoindre/imgi_35_Project_20221215_0015.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="11"><img src="images/nous rejoindre/imgi_36_Project_20221215_0023.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="12"><img src="images/nous rejoindre/imgi_22_Project_20221215_0020.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="13"><img src="images/nous rejoindre/imgi_61_20221215_162456-scaled.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="14"><img src="images/nous rejoindre/imgi_48_Project_20211216_0041.jpg" alt=""></div>
+      <div class="rj-thumb" data-index="15"><img src="images/nous rejoindre/imgi_33_IMG_0016.jpg" alt=""></div>
+    </div>
+  </div>
+
+  <!-- ======================== POURQUOI NOUS REJOINDRE ======================== -->
+  <section class="rj-why">
+    <div class="rj-why-inner">
+      <div class="rj-why-header" data-reveal>
+        <div>
+          <div class="eyebrow">La vie chez Sogexa</div>
+          <h2 class="rj-why-title">Bien plus qu'un<br><em>cabinet comptable.</em></h2>
+        </div>
+        <p class="rj-why-sub">Une culture d'entreprise construite sur la confiance, le partage et le développement de chacun.</p>
+      </div>
+      <div class="rj-why-grid">
+        <div class="rj-why-card" data-reveal>
+          <div class="rj-why-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="rj-why-name">La pépinière</h3>
+          <p class="rj-why-desc">Un programme d'intégration structuré pour les nouveaux arrivants. Vous êtes accompagné à votre rythme par un référent expérimenté dès le premier jour.</p>
+        </div>
+        <div class="rj-why-card" data-reveal style="transition-delay:.1s">
+          <div class="rj-why-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3 class="rj-why-name">Formation continue</h3>
+          <p class="rj-why-desc">Un apprentissage collaboratif et permanent. Les évolutions réglementaires, les nouvelles pratiques — vous montez en compétences avec le cabinet.</p>
+        </div>
+        <div class="rj-why-card" data-reveal style="transition-delay:.2s">
+          <div class="rj-why-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 class="rj-why-name">Vie d'équipe</h3>
+          <p class="rj-why-desc">Repas de fin d'année, participation aux fêtes locales de Mont-de-Marsan… Les moments partagés font partie intégrante de la culture du cabinet.</p>
+        </div>
+        <div class="rj-why-card" data-reveal style="transition-delay:.3s">
+          <div class="rj-why-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3 class="rj-why-name">Flexibilité</h3>
+          <p class="rj-why-desc">Un environnement de travail adapté à votre vie. Un cabinet à taille humaine où votre quotidien est pris en compte, pas seulement votre fiche de poste.</p>
+        </div>
+        <div class="rj-why-card" data-reveal style="transition-delay:.4s">
+          <div class="rj-why-icon">
+            <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          </div>
+          <h3 class="rj-why-name">Sport &amp; bien-être</h3>
+          <p class="rj-why-desc">Courses à pied, musculation, activités optionnelles en groupe — et des douches sur place pour s'y retrouver avant ou après la journée.</p>
+        </div>
+        <div class="rj-why-card" data-reveal style="transition-delay:.5s">
+          <div class="rj-why-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="rj-why-name">Évolution réelle</h3>
+          <p class="rj-why-desc">Des parcours construits sur la durée, avec des responsabilités croissantes. Ici, votre progression est visible et reconnue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== STATS ======================== -->
+  <section class="rj-stats">
+    <div class="rj-stats-grid">
+      <div class="rj-stat" data-reveal>
+        <div class="rj-stat-value">1989</div>
+        <div class="rj-stat-label">Année de création</div>
+      </div>
+      <div class="rj-stat" data-reveal style="transition-delay:.1s">
+        <div class="rj-stat-value">30+</div>
+        <div class="rj-stat-label">Collaborateurs</div>
+      </div>
+      <div class="rj-stat" data-reveal style="transition-delay:.2s">
+        <div class="rj-stat-value">69%</div>
+        <div class="rj-stat-label">Femmes dans l'équipe</div>
+      </div>
+      <div class="rj-stat" data-reveal style="transition-delay:.3s">
+        <div class="rj-stat-value">Landes</div>
+        <div class="rj-stat-label">Saint-Pierre-du-Mont · Mont-de-Marsan</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== STAGE ======================== -->
+  <section class="rj-stage-section" id="stage">
+    <div class="rj-stage-photo" data-reveal-left>
+      <img src="images/stage.jpg" alt="Stage expertise comptable">
+    </div>
+    <div class="rj-stage-content" data-reveal-right>
+      <div class="eyebrow">Stages &amp; alternance</div>
+      <h2 class="rj-stage-title">
+        Tu veux faire ton stage<br><em>d'expertise comptable ?</em>
+      </h2>
+      <p class="rj-stage-text">
+        Sogexa accueille des stagiaires et alternants souhaitant réaliser leurs heures
+        dans le cadre de leur cursus d'expertise comptable. Un encadrement bienveillant,
+        des missions réelles, et une équipe qui prend le temps de transmettre.
+      </p>
+      <a href="#candidature" class="btn-primary" style="align-self:flex-start">
+        Déposer ma candidature
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================== FORMULAIRE ======================== -->
+  <section class="rj-form-section" id="candidature">
+    <div class="rj-form-inner">
+      <div data-reveal>
+        <div class="eyebrow">Candidature spontanée</div>
+        <h2 class="rj-form-title">
+          Tu cherches un cabinet<br>dans les <em>Landes ?</em>
+        </h2>
+        <p class="rj-form-text">
+          Envoie-nous ta candidature spontanée — CV et message de motivation.
+          Nous lisons chaque dossier avec attention.
+        </p>
+        <div class="rj-form-info">
+          <div class="rj-info-block">
+            <div class="rj-info-label">Adresse</div>
+            <div class="rj-info-val">217 avenue du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont</div>
+          </div>
+          <div class="rj-info-block">
+            <div class="rj-info-label">Téléphone</div>
+            <div class="rj-info-val">05 58 06 26 64</div>
+          </div>
+          <div class="rj-info-block">
+            <div class="rj-info-label">Horaires</div>
+            <div class="rj-info-val">Lundi — Vendredi · 9h–12h / 13h30–17h30</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="rj-form" data-reveal style="transition-delay:.15s" onsubmit="return false">
+        <div class="rj-form-row">
+          <input class="rj-input" type="text" placeholder="Nom">
+          <input class="rj-input" type="text" placeholder="Prénom">
+        </div>
+        <input class="rj-input" type="email" placeholder="Email" style="width:100%;margin-bottom:16px">
+        <textarea class="rj-textarea" placeholder="Message de motivation" rows="4"></textarea>
+        <div class="rj-upload">
+          <input type="file" accept=".pdf,.doc,.docx">
+          <div class="rj-upload-icon">↑</div>
+          <div class="rj-upload-text">
+            <strong>Joindre votre CV</strong><br>PDF, DOC — 5 Mo max
+          </div>
+        </div>
+        <button type="button" class="btn-primary rj-submit">Envoyer ma candidature →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa"
+          style="height:32px;width:auto;filter:invert(1) hue-rotate(180deg)">
+        <p class="footer-desc">Cabinet d'expertise comptable indépendant à Saint-Pierre-du-Mont, Landes.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Cabinet</div>
+        <div class="footer-link">Notre cabinet</div>
+        <div class="footer-link">Nos locaux</div>
+        <a class="footer-link" href="equipe.html">Notre équipe</a>
+        <a class="footer-link" href="rejoindre.html">Nous rejoindre</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Missions</div>
+        <a class="footer-link" href="missions.html#expertise">L'expertise comptable</a>
+        <a class="footer-link" href="missions.html#social">La gestion sociale &amp; RH</a>
+        <a class="footer-link" href="missions.html#conseil">Conseil &amp; gestion</a>
+        <a class="footer-link" href="missions.html#juridique">Juridique &amp; fiscal</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-link">05 58 06 26 64</div>
+        <div class="footer-link">sogexa@sogexa.fr</div>
+        <div class="footer-link" style="line-height:1.5">
+          217 av. du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Sogexa. Tous droits réservés.</div>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Diaporama ───────────────────────────────────────────────────
+    const slides  = document.querySelectorAll('.rj-slide');
+    const thumbs  = document.querySelectorAll('.rj-thumb');
+    const curEl   = document.getElementById('rj-cur');
+    const bar     = document.getElementById('rj-progress');
+    const strip   = document.getElementById('rj-thumbstrip');
+    const DELAY   = 5000;
+    let current   = 0;
+    let autoTimer = null;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      thumbs[current].classList.remove('active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      thumbs[current].classList.add('active');
+      curEl.textContent = String(current + 1).padStart(2, '0');
+
+      // scroll strip to keep active thumb visible
+      const thumb = thumbs[current];
+      const stripRect = strip.getBoundingClientRect();
+      const thumbRect = thumb.getBoundingClientRect();
+      const offset = thumbRect.left - stripRect.left - (stripRect.width / 2) + (thumbRect.width / 2);
+      strip.scrollBy({ left: offset, behavior: 'smooth' });
+
+      startProgress();
+    }
+
+    function startProgress() {
+      clearInterval(autoTimer);
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bar.style.transition = `width ${DELAY}ms linear`;
+        bar.style.width = '100%';
+      }));
+      autoTimer = setTimeout(() => goTo(current + 1), DELAY);
+    }
+
+    document.getElementById('rj-prev').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('rj-next').addEventListener('click', () => goTo(current + 1));
+    thumbs.forEach(t => t.addEventListener('click', () => goTo(+t.dataset.index)));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    startProgress();
+
+    // ── Scroll reveal ───────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('[data-reveal], [data-reveal-left], [data-reveal-right]')
+      .forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

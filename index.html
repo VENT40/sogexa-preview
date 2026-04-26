@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOGEXA — Cabinet d'expertise comptable · Landes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      color: #1f1d1a;
+      background: #fbf9f5;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    :root {
+      --orange: #F39200;
+      --orange-deep: #d97a00;
+      --dark: #1f1d1a;
+      --cream: #fbf9f5;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+    .serif {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    /* Reveal animation */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal].revealed { opacity: 1; transform: none; }
+
+    [data-reveal-left] {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+    }
+    [data-reveal-left].revealed { opacity: 1; transform: none; }
+
+    [data-reveal-right] {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
+      transition-delay: .15s;
+    }
+    [data-reveal-right].revealed { opacity: 1; transform: none; }
+
+    /* Eyebrow label */
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--orange); color: #fff;
+      padding: 14px 28px;
+      font-weight: 600; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background .25s, transform .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit;
+    }
+    .btn-primary:hover { background: var(--orange-deep); transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent; color: #1f1d1a;
+      padding: 14px 28px;
+      font-weight: 600; font-size: 14px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      border: 1.5px solid #1f1d1a; cursor: pointer;
+      transition: background .25s, color .25s;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit;
+    }
+    .btn-ghost:hover { background: #1f1d1a; color: #fff; }
+
+    /* ========================
+       NAVIGATION
+    ======================== */
+    .nav {
+      background: #fbf9f5;
+      border-bottom: 1px solid #ece6da;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto;
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { height: 32px; width: auto; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link {
+      color: #2c2a26; font-size: 14px; font-weight: 500;
+      padding: 8px 0; border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s; cursor: pointer;
+    }
+    .nav-link:hover,
+    .nav-link.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .nav-cta { padding: 10px 18px; font-size: 12px; }
+
+    /* ========================
+       HERO
+    ======================== */
+    .hero {
+      position: relative;
+      height: 100vh; min-height: 560px;
+      overflow: hidden;
+      background: #f8f3eb;
+    }
+    .hero-left {
+      position: absolute; top: 0; left: 0; bottom: 0; width: 50%;
+      display: flex; align-items: center;
+      padding: 100px 56px 64px 72px;
+      z-index: 2;
+    }
+    .hero-bar {
+      position: absolute; top: 0; bottom: 0; left: 0;
+      width: 6px; background: var(--orange); z-index: 3;
+    }
+    .hero-text { max-width: 480px; }
+    .hero-title {
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 1.05; margin: 0 0 24px;
+      color: var(--dark);
+    }
+    .hero-title em { color: var(--orange); font-style: italic; font-weight: 400; }
+    .hero-subtitle {
+      font-size: 17px; line-height: 1.7; color: rgba(31,29,26,.62);
+      max-width: 420px; margin: 0 0 36px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 20px;
+      padding: 18px 24px; background: var(--orange); color: #fff;
+      max-width: 400px;
+    }
+    .hero-badge-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 40px; font-weight: 700; line-height: 1;
+    }
+    .hero-badge-num sup { font-size: 22px; vertical-align: baseline; }
+    .hero-badge-text { font-size: 13px; line-height: 1.4; }
+    .hero-right {
+      position: absolute; top: 36px; right: 0; bottom: 36px; left: 44%;
+      border-radius: 50% 0 0 50%;
+      overflow: hidden;
+      outline: 1.5px solid rgba(243,146,0,.6);
+      outline-offset: 8px;
+      z-index: 1;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center center;
+      display: block;
+    }
+
+    /* ========================
+       STATS
+    ======================== */
+    .stats { background: #1f1d1a; color: #fbf9f5; padding: 64px 48px; }
+    .stats-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px;
+    }
+    .stat { border-left: 2px solid var(--orange); padding-left: 24px; }
+    .stat-value {
+      font-family: 'Source Serif 4', serif;
+      font-size: 56px; line-height: 1; color: var(--orange);
+    }
+    .stat-label { font-size: 14px; margin-top: 12px; opacity: .8; }
+
+    /* ========================
+       MISSIONS
+    ======================== */
+    .missions {
+      background: #faf6ec; color: #2a2620;
+      padding: 90px 48px;
+      border-top: 1px solid #ece6da; border-bottom: 1px solid #ece6da;
+    }
+    .missions-inner { max-width: 1400px; margin: 0 auto; }
+    .missions-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: end; margin-bottom: 80px; gap: 40px;
+    }
+    .missions-title {
+      font-size: clamp(44px, 6vw, 80px);
+      line-height: 1.05; letter-spacing: -0.02em; color: #1a1814;
+    }
+    .missions-title em { font-style: italic; color: var(--orange); }
+
+    .mission-item {
+      border-top: 1px solid #d8d1bf;
+      padding: 32px 0;
+      cursor: pointer;
+      transition: padding .5s cubic-bezier(.2,.8,.2,1), background .4s;
+    }
+    .mission-item:last-child { border-bottom: 1px solid #d8d1bf; }
+    .mission-item:hover {
+      padding: 48px 0;
+      background: linear-gradient(90deg, rgba(243,146,0,.07) 0%, transparent 65%);
+    }
+    .mission-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto;
+      gap: 32px; align-items: center;
+    }
+    .mission-num {
+      font-size: 13px; color: #a8a08c;
+      font-variant-numeric: tabular-nums;
+      transition: color .3s;
+    }
+    .mission-item:hover .mission-num { color: var(--orange); }
+    .mission-title-wrap { overflow: hidden; }
+    .mission-title {
+      font-family: 'Source Serif 4', serif;
+      font-size: 38px; margin: 0;
+      color: #1a1814; letter-spacing: -0.02em;
+      line-height: 1; font-weight: 400;
+      transition: font-size .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .mission-item:hover .mission-title { font-size: 60px; }
+    .mission-desc {
+      max-height: 0; overflow: hidden;
+      transition: max-height .5s cubic-bezier(.2,.8,.2,1), margin-top .4s;
+      margin-top: 0;
+    }
+    .mission-item:hover .mission-desc { max-height: 100px; margin-top: 16px; }
+    .mission-desc p {
+      font-size: 16px; color: #5a564e;
+      margin: 0; max-width: 600px; line-height: 1.55;
+    }
+    .mission-dots { display: flex; gap: 6px; opacity: .4; transition: opacity .3s; }
+    .mission-item:hover .mission-dots { opacity: 1; }
+    .mission-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+    .mission-arrow {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: transparent; border: 1px solid #c8bfa8;
+      display: flex; align-items: center; justify-content: center;
+      color: #5a564e; font-size: 18px;
+      transition: all .5s cubic-bezier(.2,.8,.2,1);
+      flex-shrink: 0;
+    }
+    .mission-item:hover .mission-arrow {
+      width: 64px; height: 64px;
+      background: var(--orange); border-color: var(--orange);
+      color: #fff; font-size: 22px;
+      transform: rotate(-45deg);
+    }
+
+    /* ========================
+       DIRIGEANTS
+    ======================== */
+    .dirigeants { background: #f4eee2; padding: 90px 48px; }
+    .dirigeants-grid {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .dirigeants-photo { position: relative; }
+    .dirigeants-img-wrap {
+      aspect-ratio: 4/5; border-radius: 24px; overflow: hidden;
+    }
+    .dirigeants-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 25%;
+    }
+    .dirigeants-quote {
+      position: absolute; right: -32px; bottom: -32px;
+      background: var(--orange); color: #fff;
+      padding: 32px; border-radius: 16px; max-width: 280px;
+    }
+    .dirigeants-quote-mark { font-size: 36px; line-height: 1; opacity: .7; margin-bottom: 8px; }
+    .dirigeants-quote-text { font-size: 18px; line-height: 1.4; font-weight: 500; }
+    .dirigeants-bio {
+      font-size: 18px; line-height: 1.65; color: #5a564e;
+      margin: 0 0 40px;
+    }
+    .dirigeants-names {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid #d8d1bf; border-bottom: 1px solid #d8d1bf;
+    }
+    .dirigeant-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; color: #1a1814; }
+    .dirigeant-role { font-size: 13px; color: #5a564e; }
+
+    /* ========================
+       REASONS
+    ======================== */
+    .reasons-section { background: #1f1d1a; padding: 80px 48px; }
+    .reasons-inner { max-width: 1280px; margin: 0 auto; }
+    .reasons-header { margin-bottom: 72px; display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+    .reasons-title { font-size: clamp(36px, 4vw, 52px); line-height: 1.1; margin-top: 16px; color: #fbf9f5; }
+    .reasons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .reason-card {
+      background: #2a2823; padding: 48px 40px 56px;
+      position: relative; overflow: hidden;
+      transition: background .4s, transform .4s cubic-bezier(.2,.8,.2,1);
+    }
+    .reason-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1);
+    }
+    .reason-card:hover { background: #322f28; transform: translateY(-6px); }
+    .reason-card:hover::before { transform: scaleX(1); }
+    .reason-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(243,146,0,.12); border: 1.5px solid rgba(243,146,0,.3);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 32px;
+      transition: background .4s, border-color .4s;
+    }
+    .reason-card:hover .reason-icon { background: rgba(243,146,0,.22); border-color: var(--orange); }
+    .reason-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .reason-num {
+      font-family: 'Source Serif 4', serif;
+      font-size: 13px; color: var(--orange);
+      letter-spacing: .18em; text-transform: uppercase;
+      margin-bottom: 16px; display: block;
+    }
+    .reason-title { font-size: 26px; margin: 0 0 16px; color: #fbf9f5; }
+    .reason-desc { font-size: 15px; line-height: 1.75; color: #8a8276; margin: 0; }
+    .reason-arrow {
+      position: absolute; bottom: 40px; right: 40px;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid #4a463f;
+      display: flex; align-items: center; justify-content: center;
+      color: #4a463f; font-size: 14px;
+      transition: all .4s;
+    }
+    .reason-card:hover .reason-arrow { border-color: var(--orange); color: var(--orange); transform: rotate(-45deg); }
+
+    /* ========================
+       CONTACT
+    ======================== */
+    .contact { background: #1f1d1a; color: #fbf9f5; padding: 80px 48px; }
+    .contact-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    }
+    .contact-info-block { margin-bottom: 28px; }
+    .contact-label {
+      font-size: 12px; opacity: .6;
+      letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .contact-phone {
+      font-family: 'Source Serif 4', serif;
+      font-size: 32px; color: var(--orange);
+    }
+    .contact-phone:hover { color: var(--orange-deep); }
+    .contact-form { background: #2a2823; padding: 40px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: transparent;
+      border: none; border-bottom: 1px solid #4a463f;
+      color: #fbf9f5; padding: 14px 0;
+      font-size: 15px; font-family: inherit;
+      outline: none; width: 100%;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: #6b6259; }
+    .form-select {
+      appearance: none; cursor: pointer;
+      margin-bottom: 16px;
+    }
+    .form-select option { background: #2a2823; }
+    .form-textarea { resize: vertical; margin-bottom: 16px; }
+    .form-submit { width: 100%; justify-content: center; }
+
+    /* ========================
+       AVIS CLIENTS
+    ======================== */
+    .avis-section { background: #faf6ec; padding: 80px 48px 60px; border-top: 1px solid #ece6da; }
+    .avis-header { max-width: 1280px; margin: 0 auto 64px; }
+    .avis-title { font-size: clamp(36px, 4vw, 48px); line-height: 1.1; margin-top: 16px; }
+    .avis-stage {
+      position: relative; height: 460px; width: 100%;
+      overflow: hidden;
+    }
+    .avis-card {
+      position: absolute; left: 50%; top: 50%;
+      cursor: pointer;
+      border: 2px solid #ece6da;
+      padding: 32px;
+      transition: transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .5s, background .3s, border-color .3s, opacity .5s;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    }
+    .avis-card:not(.avis-card--center) {
+      opacity: .75;
+      filter: saturate(.7);
+    }
+    .avis-card:hover:not(.avis-card--center) {
+      border-color: var(--orange);
+      box-shadow: 0 8px 32px rgba(243,146,0,.18);
+      opacity: .95;
+      filter: saturate(1);
+    }
+    .avis-card--center {
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 16px 48px rgba(243,146,0,.35), 0px 8px 0px 4px #ece6da;
+      opacity: 1;
+      filter: saturate(1);
+    }
+    @keyframes float {
+      0%   { translate: 0 0px; }
+      50%  { translate: 0 -10px; }
+      100% { translate: 0 0px; }
+    }
+    .avis-corner {
+      position: absolute; display: block;
+      top: 48px; right: -2px;
+      height: 2px; background: #ece6da;
+      transform: rotate(45deg); transform-origin: top right;
+    }
+    .avis-card--center .avis-corner { background: rgba(255,255,255,.35); }
+    .avis-avatar {
+      width: 48px; height: 56px;
+      object-fit: cover; object-position: top;
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0px #fbf9f5;
+      background: #ece6da;
+    }
+    .avis-quote {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 16px; font-weight: 500;
+      line-height: 1.5; margin: 0;
+      color: #1f1d1a;
+    }
+    .avis-card--center .avis-quote { color: #fff; }
+    .avis-author {
+      position: absolute; bottom: 28px; left: 32px; right: 32px;
+      margin: 0; font-size: 13px; font-style: italic;
+      color: #5a564e;
+    }
+    .avis-card--center .avis-author { color: rgba(255,255,255,.8); }
+    .avis-nav {
+      display: flex; justify-content: center; gap: 8px;
+      margin-top: 32px;
+    }
+    .avis-btn {
+      width: 56px; height: 56px;
+      display: flex; align-items: center; justify-content: center;
+      background: #fbf9f5; border: 2px solid #ece6da;
+      font-size: 22px; cursor: pointer;
+      transition: background .25s, color .25s, border-color .25s;
+      font-family: inherit; color: #1f1d1a;
+    }
+    .avis-btn:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+    /* ========================
+       HERO TEXT REVEAL
+    ======================== */
+    .hero-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+    }
+    .hero-word.visible { opacity: 1; transform: none; }
+    .hero-fade {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+    }
+    .hero-fade.visible { opacity: 1; transform: none; }
+
+    /* ========================
+       FOOTER
+    ======================== */
+    .footer { background: #0a0a0a; color: #a3a3a3; padding: 80px 48px 40px; }
+    .footer-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; padding-bottom: 48px;
+      border-bottom: 1px solid #262626; margin-bottom: 40px;
+    }
+    .footer-desc { margin-top: 24px; font-size: 14px; line-height: 1.6; max-width: 320px; }
+    .footer-col-title { font-size: 13px; color: #fff; margin-bottom: 16px; font-weight: 600; }
+    .footer-link { font-size: 14px; margin-bottom: 10px; cursor: pointer; transition: color .2s; }
+    .footer-link:hover { color: var(--orange); }
+    .footer-bottom {
+      max-width: 1280px; margin: 0 auto;
+      display: flex; justify-content: space-between;
+      font-size: 13px; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { transition: color .2s; }
+    .footer-legal a:hover { color: var(--orange); }
+  </style>
+</head>
+<body>
+
+  <!-- ======================== NAVIGATION ======================== -->
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <img class="nav-logo" src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa">
+      <nav class="nav-links">
+        <a class="nav-link active" href="#accueil">Accueil</a>
+        <a class="nav-link" href="equipe.html">Notre équipe</a>
+        <a class="nav-link" href="missions.html">Nos missions</a>
+        <a class="nav-link" href="locaux.html">Nos locaux</a>
+        <a class="nav-link" href="rejoindre.html">Nous rejoindre</a>
+        <a class="nav-link" href="contact.html">Nous contacter</a>
+      </nav>
+      <a class="btn-primary nav-cta" href="https://sogexa.welyb.fr/signin?redirect=%252Fhome" target="_blank" rel="noopener">Espace client →</a>
+    </div>
+  </header>
+
+  <!-- ======================== HERO ======================== -->
+  <section class="hero" id="accueil">
+    <div class="hero-left">
+      <div class="hero-bar"></div>
+      <div class="hero-text">
+        <h1 class="hero-title" data-reveal>
+          Votre cabinet,<br><em style="white-space:nowrap">engagé à vos côtés.</em>
+        </h1>
+        <p class="hero-subtitle" id="hero-subtitle">
+          Cabinet indépendant installé à Saint-Pierre-du-Mont depuis plus de 30 ans.
+          Nous accompagnons chefs d'entreprises, professions libérales et associations
+          à chaque étape de leur vie.
+        </p>
+        <div class="hero-actions hero-fade" id="hero-actions">
+          <button class="btn-primary">Prendre rendez-vous</button>
+          <button class="btn-ghost">Découvrir nos missions</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="images/groupe 1.jpg" alt="L'équipe Sogexa">
+    </div>
+  </section>
+
+  <!-- ======================== STATS ======================== -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat" data-reveal>
+        <div class="stat-value" data-count="30" data-suffix="+">30+</div>
+        <div class="stat-label">années d'expérience</div>
+      </div>
+      <div class="stat" data-reveal style="transition-delay:.1s">
+        <div class="stat-value" data-count="2">2</div>
+        <div class="stat-label">experts-comptables associés</div>
+      </div>
+      <div class="stat" data-reveal style="transition-delay:.2s">
+        <div class="stat-value" data-count="850" data-prefix="+">+850</div>
+        <div class="stat-label">clients accompagnés</div>
+      </div>
+      <div class="stat" data-reveal style="transition-delay:.3s">
+        <div class="stat-value" data-count="40">40</div>
+        <div class="stat-label">Landes — Saint-Pierre-du-Mont</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== MISSIONS ======================== -->
+  <section class="missions" id="missions">
+    <div class="missions-inner">
+      <div class="missions-header" data-reveal>
+        <div>
+          <div class="eyebrow" style="margin-bottom:16px">§ Nos missions</div>
+          <h2 class="missions-title">
+            Cinq expertises,<br>
+            <em>une seule équipe.</em>
+          </h2>
+        </div>
+      </div>
+
+      <div>
+        <div class="mission-item" data-reveal>
+          <div class="mission-row">
+            <div class="mission-num">/01</div>
+            <div class="mission-title-wrap">
+              <h3 class="mission-title">L'expertise comptable</h3>
+              <div class="mission-desc">
+                <p>Tenue, révision et établissement des comptes annuels, situations intermédiaires, tableaux de bord.</p>
+              </div>
+            </div>
+            <div class="mission-dots">
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+            </div>
+            <div class="mission-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="mission-item" data-reveal style="transition-delay:.08s">
+          <div class="mission-row">
+            <div class="mission-num">/02</div>
+            <div class="mission-title-wrap">
+              <h3 class="mission-title">La gestion sociale &amp; RH</h3>
+              <div class="mission-desc">
+                <p>Bulletins de paie, déclarations sociales, contrats de travail, accompagnement RH au quotidien.</p>
+              </div>
+            </div>
+            <div class="mission-dots">
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+            </div>
+            <div class="mission-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="mission-item" data-reveal style="transition-delay:.16s">
+          <div class="mission-row">
+            <div class="mission-num">/03</div>
+            <div class="mission-title-wrap">
+              <h3 class="mission-title">Conseil &amp; gestion</h3>
+              <div class="mission-desc">
+                <p>Pilotage stratégique, prévisionnels, business plans, analyse de performance et accompagnement.</p>
+              </div>
+            </div>
+            <div class="mission-dots">
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+            </div>
+            <div class="mission-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="mission-item" data-reveal style="transition-delay:.24s">
+          <div class="mission-row">
+            <div class="mission-num">/04</div>
+            <div class="mission-title-wrap">
+              <h3 class="mission-title">Juridique &amp; fiscal</h3>
+              <div class="mission-desc">
+                <p>Constitution, secrétariat juridique, conventions, fiscalité personnelle et professionnelle.</p>
+              </div>
+            </div>
+            <div class="mission-dots">
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+            </div>
+            <div class="mission-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="mission-item" data-reveal style="transition-delay:.32s">
+          <div class="mission-row">
+            <div class="mission-num">/05</div>
+            <div class="mission-title-wrap">
+              <h3 class="mission-title">Création, reprise, transmission</h3>
+              <div class="mission-desc">
+                <p>Étude de faisabilité, choix de structure, valorisation et accompagnement aux moments clés.</p>
+              </div>
+            </div>
+            <div class="mission-dots">
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+              <div class="mission-dot"></div>
+            </div>
+            <div class="mission-arrow">→</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== DIRIGEANTS ======================== -->
+  <section class="dirigeants" id="presentation">
+    <div class="dirigeants-grid">
+      <div class="dirigeants-photo" data-reveal-left>
+        <div class="dirigeants-img-wrap">
+          <img src="SOGEXA — Direction Sage_files/dirigeants.jpg" alt="David Baslé et Franck Moussion, associés Sogexa">
+        </div>
+        <div class="dirigeants-quote">
+          <div class="dirigeants-quote-mark">"</div>
+          <div class="dirigeants-quote-text">L'humain est au cœur de notre relation professionnelle.</div>
+        </div>
+      </div>
+
+      <div data-reveal-right>
+        <div class="eyebrow" style="margin-bottom:16px">● Direction</div>
+        <h2 style="font-size:clamp(44px,5vw,64px);margin:0 0 32px;line-height:1.05">
+          David Baslé<br>&amp; Franck Moussion
+        </h2>
+        <p class="dirigeants-bio">
+          Tous deux experts-comptables, ils dirigent un cabinet à taille humaine ancré dans
+          le tissu économique landais. Leur ambition : conjuguer rigueur technique et
+          relation de proximité.
+        </p>
+        <div class="dirigeants-names">
+          <div>
+            <div class="dirigeant-name">David Baslé</div>
+            <div class="dirigeant-role">Expert-comptable · Commissaire aux comptes</div>
+          </div>
+          <div>
+            <div class="dirigeant-name">Franck Moussion</div>
+            <div class="dirigeant-role">Expert-comptable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== REASONS ======================== -->
+  <section class="reasons-section">
+    <div class="reasons-inner">
+      <div class="reasons-header" data-reveal>
+        <div>
+          <div class="eyebrow">Pourquoi Sogexa</div>
+          <h2 class="reasons-title">Trois raisons de nous<br>faire confiance.</h2>
+        </div>
+        <p style="font-size:16px;line-height:1.7;color:#8a8276;max-width:380px;margin:0">Un cabinet à taille humaine, ancré dans les Landes depuis plus de 30 ans.</p>
+      </div>
+      <div class="reasons-grid">
+
+        <div class="reason-card" data-reveal>
+          <div class="reason-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <span class="reason-num">01</span>
+          <h3 class="reason-title">L'humain</h3>
+          <p class="reason-desc">Écoute, échanges respectueux, empathie professionnelle, confiance partagée. Une valeur essentielle à la réussite de vos projets.</p>
+          <div class="reason-arrow">→</div>
+        </div>
+
+        <div class="reason-card" data-reveal style="transition-delay:.12s">
+          <div class="reason-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span class="reason-num">02</span>
+          <h3 class="reason-title">La proximité</h3>
+          <p class="reason-desc">Ligne directe, plateforme digitale sécurisée, déplacements dans vos locaux. Des réponses de qualité dans des délais courts.</p>
+          <div class="reason-arrow">→</div>
+        </div>
+
+        <div class="reason-card" data-reveal style="transition-delay:.24s">
+          <div class="reason-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="reason-num">03</span>
+          <h3 class="reason-title">Les compétences</h3>
+          <p class="reason-desc">Formation continue, savoir-faire enrichi en permanence, exigence de qualité dans nos raisonnements techniques.</p>
+          <div class="reason-arrow">→</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== AVIS CLIENTS ======================== -->
+  <section class="avis-section" id="avis">
+    <div class="avis-header" data-reveal>
+      <div class="eyebrow">Ils nous font confiance</div>
+      <h2 class="avis-title">Avis clients.</h2>
+    </div>
+    <div class="avis-stage" id="avis-stage"></div>
+    <div class="avis-nav">
+      <button class="avis-btn" id="avis-prev" aria-label="Précédent">&#8592;</button>
+      <button class="avis-btn" id="avis-next" aria-label="Suivant">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- ======================== CONTACT ======================== -->
+  <section class="contact" id="contact">
+    <div class="contact-grid">
+      <div data-reveal>
+        <div class="eyebrow" style="margin-bottom:16px">Nous contacter</div>
+        <h2 style="font-size:clamp(36px,4vw,48px);margin:0 0 40px;line-height:1.1;color:#fbf9f5">
+          Parlons de votre projet.
+        </h2>
+
+        <div class="contact-info-block">
+          <div class="contact-label">Téléphone</div>
+          <a href="tel:0558062664" class="contact-phone serif">05 58 06 26 64</a>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">Email</div>
+          <a href="mailto:sogexa@sogexa.fr" style="font-size:17px">sogexa@sogexa.fr</a>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">Adresse</div>
+          <div style="font-size:17px;line-height:1.5">
+            217 avenue du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont
+          </div>
+        </div>
+        <div class="contact-info-block">
+          <div class="contact-label">Horaires</div>
+          <div style="font-size:17px">Lundi — Vendredi · 9h–12h / 13h30–17h30</div>
+        </div>
+      </div>
+
+      <form class="contact-form" data-reveal style="transition-delay:.15s" onsubmit="return false">
+        <div class="form-row">
+          <input class="form-input" type="text" placeholder="Nom">
+          <input class="form-input" type="text" placeholder="Prénom">
+          <input class="form-input" type="tel" placeholder="Téléphone">
+          <input class="form-input" type="email" placeholder="Email">
+        </div>
+        <select class="form-select">
+          <option value="">Objet — Comptabilité</option>
+          <option>Juridique &amp; fiscal</option>
+          <option>Conseil &amp; gestion</option>
+          <option>Social</option>
+          <option>Organisation</option>
+        </select>
+        <textarea class="form-textarea" placeholder="Votre message" rows="5"></textarea>
+        <button type="button" class="btn-primary form-submit">Envoyer le message →</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="SOGEXA — Direction Sage_files/sogexa-logo.png" alt="Sogexa"
+          style="height:32px;width:auto;filter:invert(1) hue-rotate(180deg)">
+        <p class="footer-desc">Cabinet d'expertise comptable indépendant à Saint-Pierre-du-Mont, Landes.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Cabinet</div>
+        <div class="footer-link">Notre cabinet</div>
+        <div class="footer-link">Nos locaux</div>
+        <div class="footer-link" id="equipe">Notre équipe</div>
+        <div class="footer-link">Nous rejoindre</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Missions</div>
+        <div class="footer-link">L'expertise comptable</div>
+        <div class="footer-link">La gestion sociale &amp; RH</div>
+        <div class="footer-link">Conseil &amp; gestion</div>
+        <div class="footer-link">Juridique &amp; fiscal</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-link">05 58 06 26 64</div>
+        <div class="footer-link">sogexa@sogexa.fr</div>
+        <div class="footer-link" style="line-height:1.5">
+          217 av. du Corps Franc-Pommiès<br>40280 Saint-Pierre-du-Mont
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Sogexa. Tous droits réservés.</div>
+      <div class="footer-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Avis clients carousel ──────────────────────────────────────
+    const SQRT_5000 = Math.sqrt(5000);
+    const AVIS_DATA = [
+      { id:0, text: "Cabinet de comptables de très bons conseils. Je recommande sans hésiter toute l'équipe.", by: "Axel Romio · Google ★★★★★", img: "https://i.pravatar.cc/150?img=33" },
+      { id:1, text: "Un très bon accueil client et de bons conseils.", by: "Berenice Larcher · Google ★★★★★", img: "https://i.pravatar.cc/150?img=47" },
+      { id:2, text: "Ambiance super agréable au sein de l'entreprise.", by: "Charles de Latour · Google ★★★★★", img: "https://i.pravatar.cc/150?img=15" },
+      { id:3, text: "Très bon accueil. Excellent conseil.", by: "Ducros Jean-Luc · Google ★★★★★", img: "https://i.pravatar.cc/150?img=67" },
+      { id:4, text: "Un cabinet sérieux et de confiance. Suivi personnalisé, toujours disponibles pour répondre à nos questions.", by: "Marie-Hélène P. · Google ★★★★★", img: "https://i.pravatar.cc/150?img=44" },
+    ];
+    let avisList = [...AVIS_DATA];
+
+    function getCardSize() {
+      return window.matchMedia('(min-width: 640px)').matches ? 310 : 240;
+    }
+
+    function renderAvis() {
+      const stage = document.getElementById('avis-stage');
+      if (!stage) return;
+      const cardSize = getCardSize();
+      stage.innerHTML = '';
+      const len = avisList.length;
+
+      avisList.forEach((t, index) => {
+        const position = index - Math.floor(len / 2);
+        const isCenter = position === 0;
+
+        const card = document.createElement('div');
+        card.className = 'avis-card' + (isCenter ? ' avis-card--center' : '');
+        card.style.width  = cardSize + 'px';
+        card.style.height = cardSize + 'px';
+        card.style.clipPath = `polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0)`;
+        card.style.transform = [
+          'translate(-50%, -50%)',
+          `translateX(${(cardSize / 1.5) * position}px)`,
+          `translateY(${isCenter ? -65 : position % 2 ? 15 : -15}px)`,
+          `rotate(${isCenter ? 0 : position % 2 ? 2.5 : -2.5}deg)`
+        ].join(' ');
+        card.style.zIndex = isCenter ? 10 : 0;
+        const duration = isCenter ? 3.2 : 3.5 + (index % 3) * 0.4;
+        const delay = -(index * 0.7);
+        card.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+        if (!isCenter) card.onclick = () => moveAvis(position);
+
+        // Corner fold line
+        const corner = document.createElement('span');
+        corner.className = 'avis-corner';
+        corner.style.width = SQRT_5000 + 'px';
+        card.appendChild(corner);
+
+        // Avatar
+        const img = document.createElement('img');
+        img.src = t.img;
+        img.alt = t.by.split(',')[0];
+        img.className = 'avis-avatar';
+        card.appendChild(img);
+
+        // Quote text
+        const quote = document.createElement('h3');
+        quote.className = 'avis-quote';
+        quote.textContent = '“' + t.text + '”';
+        card.appendChild(quote);
+
+        // Author
+        const author = document.createElement('p');
+        author.className = 'avis-author';
+        author.textContent = '— ' + t.by;
+        card.appendChild(author);
+
+        stage.appendChild(card);
+      });
+    }
+
+    function moveAvis(steps) {
+      if (steps > 0) {
+        for (let i = 0; i < steps; i++) {
+          const item = avisList.shift();
+          avisList.push({ ...item, id: Math.random() });
+        }
+      } else {
+        for (let i = 0; i < Math.abs(steps); i++) {
+          const item = avisList.pop();
+          avisList.unshift({ ...item, id: Math.random() });
+        }
+      }
+      renderAvis();
+    }
+
+    document.getElementById('avis-prev').addEventListener('click', () => moveAvis(-1));
+    document.getElementById('avis-next').addEventListener('click', () => moveAvis(1));
+    window.addEventListener('resize', renderAvis);
+    renderAvis();
+
+    // ── Hero subtitle word-by-word reveal ─────────────────────────
+    (function() {
+      const subtitle = document.getElementById('hero-subtitle');
+      const actions  = document.getElementById('hero-actions');
+      if (!subtitle) return;
+
+      const text = subtitle.innerText.trim();
+      const words = text.split(/\s+/);
+      subtitle.innerHTML = words.map(w =>
+        `<span class="hero-word">${w}</span>`
+      ).join(' ');
+
+      const spans = subtitle.querySelectorAll('.hero-word');
+      let delay = 420; // start after title animation
+      spans.forEach((span, i) => {
+        setTimeout(() => span.classList.add('visible'), delay + i * 55);
+      });
+      // buttons appear after all words
+      setTimeout(() => actions && actions.classList.add('visible'), delay + spans.length * 55 + 100);
+    })();
+
+    // ── Compteurs animés ───────────────────────────────────────────
+    function animateCount(el) {
+      const target = parseInt(el.dataset.count, 10);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const startTime = performance.now();
+
+      function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(eased * target);
+        el.textContent = prefix + current + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else el.textContent = prefix + target + suffix;
+      }
+      requestAnimationFrame(step);
+    }
+
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('[data-count]').forEach(animateCount);
+          countObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    countObserver.observe(document.querySelector('.stats'));
+
+    // Scroll-reveal via IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal], [data-reveal-left], [data-reveal-right]')
+      .forEach(el => observer.observe(el));
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id], div[id="equipe"]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sectionMap = {
+      'accueil': 0,
+      'missions': 4,
+      'presentation': 6,
+      'contact': 6,
+    };
+    window.addEventListener('scroll', () => {
+      let current = 'accueil';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+      });
+    }, { passive: true });
+  </script>
+</body>
+</html>
