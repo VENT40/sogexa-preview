@@ -457,8 +457,10 @@
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; color: #fff; font-size: 20px; line-height: 1;
-      transition: background .2s;
+      transition: background .2s, opacity .35s;
+      opacity: 0; pointer-events: none;
     }
+    .lightbox.open .lightbox-close { opacity: 1; pointer-events: all; }
     .lightbox-close:hover { background: rgba(255,255,255,.22); }
     [data-lightbox] { cursor: pointer; }
 
