@@ -184,9 +184,16 @@
       outline-offset: 8px;
       z-index: 1;
     }
+    .hero-right::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to bottom, #f8f3eb 0%, transparent 100%);
+      z-index: 2; pointer-events: none;
+    }
     .hero-right img {
       width: 100%; height: 100%;
-      object-fit: cover; object-position: 38% 80%;
+      object-fit: cover; object-position: 38% 65%;
       display: block;
     }
 
