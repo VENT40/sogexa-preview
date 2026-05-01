@@ -791,14 +791,32 @@
 
   <script>
     // ── Diaporama ───────────────────────────────────────────────────
-    const slides  = document.querySelectorAll('.rj-slide');
-    const thumbs  = document.querySelectorAll('.rj-thumb');
     const curEl   = document.getElementById('rj-cur');
     const bar     = document.getElementById('rj-progress');
     const strip   = document.getElementById('rj-thumbstrip');
     const DELAY   = 5000;
     let current   = 0;
     let autoTimer = null;
+
+    // Shuffle slides + thumbs in DOM (Fisher-Yates)
+    (function shuffle() {
+      const panel   = document.querySelector('.rj-panel-right');
+      const overlay = panel.querySelector('.rj-overlay');
+      const sArr    = Array.from(panel.querySelectorAll('.rj-slide'));
+      const tArr    = Array.from(strip.querySelectorAll('.rj-thumb'));
+      for (let i = sArr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [sArr[i], sArr[j]] = [sArr[j], sArr[i]];
+        [tArr[i], tArr[j]] = [tArr[j], tArr[i]];
+      }
+      sArr.forEach(s => { s.classList.remove('active'); panel.insertBefore(s, overlay); });
+      tArr.forEach((t, i) => { t.classList.remove('active'); t.dataset.index = i; strip.appendChild(t); });
+    })();
+
+    const slides = document.querySelectorAll('.rj-slide');
+    const thumbs = document.querySelectorAll('.rj-thumb');
+    slides[0].classList.add('active');
+    thumbs[0].classList.add('active');
 
     function goTo(idx) {
       slides[current].classList.remove('active');
