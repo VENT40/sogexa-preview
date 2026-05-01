@@ -607,18 +607,24 @@
 
       /* Hero */
       .hero { height: auto; min-height: unset; max-height: unset; }
-      .hero-left { position: relative; width: 100%; padding: 80px 24px 52px; min-height: 460px; }
+      .hero-left { position: relative; width: 100%; padding: 72px 24px 48px; min-height: unset; }
       .hero-right { display: none; }
       .hero-text { max-width: 100%; }
+      .hero-subtitle { margin-bottom: 32px; }
+      .hero-actions { margin-bottom: 0; }
 
       /* Stats */
       .stats { padding: 48px 20px; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
 
       /* Missions list (homepage) */
-      .missions-section { padding: 64px 20px; }
-      .mission-item { padding: 20px 0; }
-      .mission-title { font-size: 28px; }
+      .missions { padding: 56px 20px; }
+      .missions-header { grid-template-columns: 1fr; margin-bottom: 40px; }
+      .missions-title { font-size: 32px; }
+      .mission-item { padding: 18px 0; }
+      .mission-row { grid-template-columns: 40px 1fr auto; gap: 12px; }
+      .mission-dots { display: none; }
+      .mission-title { font-size: 22px; }
 
       /* Dirigeants */
       .dirigeants { padding: 64px 20px; }
