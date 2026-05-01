@@ -1168,11 +1168,11 @@
       ).join(' ');
 
       const spans = subtitle.querySelectorAll('.hero-word');
-      let delay = 250;
+      let delay = 150;
       spans.forEach((span, i) => {
-        setTimeout(() => span.classList.add('visible'), delay + i * 28);
+        setTimeout(() => span.classList.add('visible'), delay + i * 15);
       });
-      setTimeout(() => actions && actions.classList.add('visible'), delay + spans.length * 28 + 60);
+      setTimeout(() => actions && actions.classList.add('visible'), delay + spans.length * 15 + 40);
     })();
 
     // ── Compteurs animés ───────────────────────────────────────────
