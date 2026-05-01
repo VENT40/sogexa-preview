@@ -606,9 +606,17 @@
       .nav-cta { display: none; }
 
       /* Hero */
-      .hero { height: auto; min-height: unset; max-height: unset; }
-      .hero-left { position: relative; width: 100%; padding: 72px 24px 48px; min-height: unset; }
-      .hero-right { display: none; }
+      .hero { height: auto; min-height: unset; max-height: unset; display: flex; flex-direction: column; }
+      .hero-left { position: relative; width: 100%; padding: 72px 24px 40px; min-height: unset; }
+      .hero-right {
+        display: block;
+        position: relative;
+        width: 100%; height: 260px;
+        left: auto; top: auto; bottom: auto; right: auto;
+        border-radius: 0;
+        outline: none;
+      }
+      .hero-right img { object-position: center 25%; }
       .hero-text { max-width: 100%; }
       .hero-subtitle { margin-bottom: 32px; }
       .hero-actions { margin-bottom: 0; }
