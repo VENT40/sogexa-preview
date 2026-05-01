@@ -1078,6 +1078,10 @@
   </footer>
 
   <script>
+    // Reset scroll on every page load (prevents browser scroll-restoration from hiding hero under header)
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // ── Avis clients carousel ──────────────────────────────────────
     const SQRT_5000 = Math.sqrt(5000);
     const AVIS_DATA = [
