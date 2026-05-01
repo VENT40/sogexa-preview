@@ -242,8 +242,10 @@
       background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
       color: #fff; font-size: 20px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: background .2s;
+      transition: background .2s, opacity .35s;
+      opacity: 0; pointer-events: none;
     }
+    .lx-lightbox.open .lx-lb-close { opacity: 1; pointer-events: all; }
     .lx-lb-close:hover { background: var(--orange); border-color: var(--orange); }
     .lx-lb-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
@@ -251,8 +253,10 @@
       background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
       color: #fff; font-size: 22px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: background .2s;
+      transition: background .2s, opacity .35s;
+      opacity: 0; pointer-events: none;
     }
+    .lx-lightbox.open .lx-lb-nav { opacity: 1; pointer-events: all; }
     .lx-lb-nav:hover { background: var(--orange); border-color: var(--orange); }
     .lx-lb-prev { left: 24px; }
     .lx-lb-next { right: 24px; }
